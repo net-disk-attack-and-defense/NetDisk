@@ -1,0 +1,116 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans Light';
+    letter-spacing: .05em;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background-image: url('../image/yingxing.jpg');
+}
+
+.container {
+    height: 100%;
+    width: 80%;
+    float:right;
+    background-image: linear-gradient(to right,#F8C26B,#fbc2eb);
+}
+
+.login-wrapper{
+    background-color: #fff;
+    width: 250px;
+    height: 500px;
+    border-radius: 15px;
+    padding: 0 50px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.login-wrapper .header {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 200px;
+}
+
+.login-wrapper .form-wrapper .input-item {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    border: 0;
+    padding: 10px;
+    border-bottom: 1px solid rgb(128, 125, 125);
+    font-size: 15px;
+    outline: none;
+}
+
+.login-wrapper .form-wrapper .input-item::placeholder {
+    text-transform: uppercase;
+}
+
+.login-wrapper .form-wrapper .btnb {
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+    width: 100%;
+    margin-top: 40px;
+    background-image: linear-gradient(to right, #c5f4ff,#fbc2eb);
+    font-size: 1em;
+}
+
+.login-wrapper .form-wrapper .btnb:hover {
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+    width: 100%;
+    margin-top: 40px;
+    background-color: slategrey;
+    background-image: linear-gradient(to right,#fbc2eb,#c5f4ff);
+    font-size: 1em;
+}
+
+.login-wrapper .form-wrapper .btng {
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+    width: 100%;
+    margin-top: 40px;
+    background-image: linear-gradient(to right, #d4c5ff, #e1fbc2);
+    font-size: 1em;
+}
+
+.login-wrapper .form-wrapper .btng:hover {
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+    width: 100%;
+    margin-top: 40px;
+    background-color: slategrey;
+    background-image: linear-gradient(to right,#e1fbc2,#d4c5ff);
+    font-size: 1em;
+}
+
+.login-wrapper .form-wrapper .btn::after{
+    border: none;
+}
+
+.login-wrapper .msg {
+    text-align: center;
+    line-height: 40px;
+}
+
+.login-wrapper .msg a {
+    text-decoration-line: none;
+    color: #a6c1ee;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>File Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/filepage.css">
+</head>
+<body>
+<div class="container">
+    <p class="msg_username">Username:</p>
+    <p th:text="${session.username}" class="msg_username">未登录用户</p>
+    <button class="bt_logout">登出</button>
+    <button class="bt_delete">删除</button>
+    <button class="bt_upload">上传</button>
+    <button class="bt_download">下载</button>
+    <div class="wrapper">
+        <!--n+1行，3列（勾选列、序号列、文件名列（、文件大小列））-->
+        <!--是否需要实现分页功能-->
+        <table>
+            <tr>
+                <td width="30px">勾选</td>
+                <td width="30px">序号</td>
+                <td>文件名</td>
+            </tr>
+            <tr>
+                <td>
+                    <label> <!--尚未了解checkbox如何被后台读取-->
+                        <input checked="" class="checkbox" type="checkbox">
+                    </label>
+                </td>
+                <td>2</td> <!--按顺序顺延-->
+                <td>a.txt</td> <!--thymeleaf读取-->
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <input checked="" class="checkbox" type="checkbox">
+                    </label>
+                </td>
+                <td>2</td>
+                <td>b.txt</td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

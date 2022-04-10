@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+    <script src="js/login.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="login-wrapper">
+        <div class="header">Login in</div>
+        <div class="form-wrapper">
+            <form action="/NetDisk/login" onsubmit="check()" method="post">
+                <input type="email"    id="email"    name="email"    placeholder="email"    class="input-item" onkeyup="this.value=this.value.replace(/[, ]/g,'')" required="required" autofocus="autofocus">
+                <input type="password" id="password" name="password" placeholder="password" class="input-item" onkeyup="this.value=this.value.replace(/[, ]/g,'')" required="required">
+                <button type="submit" name="bt_login" class="btng">Login in</button>
+            </form>
+        </div>
+        <div class="msg">
+            <a href="register.html">Sign up</a><br>
+            <a href="index.html">Back to menu</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

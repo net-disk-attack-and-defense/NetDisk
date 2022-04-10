@@ -1,0 +1,244 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans Light', sans-serif;
+    letter-spacing: .05em;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+/* 渐变背景 */
+.container {
+    height: 100%;
+    width: 100%;
+    float: right;
+    background-image: linear-gradient(135deg, #69FF97 10%, #00E4FF 100%);
+}
+
+/* 中心白框 */
+.wrapper {
+    overflow: scroll;
+    background-color: #fff;
+    width: 80%;
+    height: 80%;
+    padding: 0 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -48%);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+}
+
+.wrapper table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.wrapper table tbody tr td {
+    text-align: center;
+    padding: 20px 40px;
+}
+
+.wrapper table tbody tr td {
+    border: 1px solid rgb(210, 210, 210);
+}
+
+.wrapper table tbody tr:nth-child(odd) {
+    background-color: #fcfcfc;
+}
+
+/* 用户信息 */
+.msg_username {
+    font-family: \22Comic Sans MS\22, sans-serif;
+    font-size: 34px;
+    text-align: left;
+    float: left;
+    margin: 1% 0 0 1%;
+}
+
+/* 上传按钮 */
+.bt_upload {
+    font-family: \u5E7C\u5706, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 1% 0 0 1%;
+    padding: 1.3em 3em;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    float: right;
+}
+
+.bt_upload:hover {
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+.bt_upload:active {
+    transform: translateY(-1px);
+}
+
+/* 下载按钮 */
+.bt_download {
+    font-family: \u5E7C\u5706, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 1% 0 0 1%;
+    padding: 1.3em 3em;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    float: right;
+}
+
+.bt_download:hover {
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+.bt_download:active {
+    transform: translateY(-1px);
+}
+
+/* 登出按钮 */
+.bt_logout {
+    font-family: \u5E7C\u5706, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 1% 2% 0 1%;
+    padding: 1.3em 3em;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    float: right;
+}
+
+.bt_logout:hover {
+    background-color: #e52e2e;
+    box-shadow: 0px 15px 20px rgba(229, 46, 46, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+.bt_logout:active {
+    transform: translateY(-1px);
+}
+
+/* 删除按钮 */
+
+.bt_delete {
+    font-family: \u5E7C\u5706, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 1% 2% 0 1%;
+    padding: 1.3em 3em;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    float: right;
+}
+
+.bt_delete:hover {
+    background-color: #e52e2e;
+    box-shadow: 0px 15px 20px rgba(229, 46, 46, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+.bt_delete:active {
+    transform: translateY(-1px);
+}
+
+/* checkbox */
+
+.checkbox {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    appearance: none;
+    background-color: #bbb;
+    transition: all .3s;
+}
+
+.checkbox::before {
+    content: '';
+    position: absolute;
+    border: solid #fff;
+    display: block;
+    width: .3em;
+    height: .6em;
+    border-width: 0 .2em .2em 0;
+    z-index: 1;
+    opacity: 0;
+    right: calc(50% - .3em);
+    top: calc(50% - .6em);
+    transform: rotate(0deg);
+    transition: all .3s;
+    transform-origin: center center;
+}
+
+.checkbox:checked {
+    animation: a .3s ease-in forwards;
+    background-color: rgb(120, 190, 120);
+}
+
+.checkbox:checked::before {
+    opacity: 1;
+    transform: rotate(405deg);
+}
+
+@keyframes a {
+    0% {
+        opacity: 1;
+        transform: scale(1) rotateY(0deg);
+    }
+
+    50% {
+        opacity: 0;
+        transform: scale(.8) rotateY(180deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotateY(360deg);
+    }
+}
