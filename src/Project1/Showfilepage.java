@@ -13,12 +13,12 @@ public class Showfilepage extends ViewBaseServlet {
         HttpSession session = request.getSession(false);//不创建新ID
         if (session != null) { //判断session是否存在
             if (!session.isNew()) {//判断session是否新的，但似乎无用
+                System.out.println(request.getHeader("referer"));
                 Referer_Check RC = new Referer_Check(request.getHeader("referer"), "NetDisk/login.html");
                 Referer_Check RC1 = new Referer_Check(request.getHeader("referer"), "NetDisk/filepage.html");
-                Referer_Check RC2 = new Referer_Check(request.getHeader("referer"), "NetDisk/SFP");
-                Referer_Check RC3 = new Referer_Check(request.getHeader("referer"), "NetDisk/FileExist.html");
-                Referer_Check RC4 = new Referer_Check(request.getHeader("referer"), "NetDisk/FileUploadFail.html");
-                if (!RC.check() || !RC1.check() || !RC2.check() || !RC3.check() || !RC4.check()) {  //验证来源链接
+                Referer_Check RC2 = new Referer_Check(request.getHeader("referer"), "NetDisk/SFP");//TODO 此处函数有待优化
+                Referer_Check RC3 = new Referer_Check(request.getHeader("referer"), "NetDisk/ShowError");
+                if (!RC.check() || !RC1.check() || !RC2.check() || !RC3.check()) {  //验证来源链接
                     if (session.getAttribute("username") != null) {
                         String realpath = request.getServletContext().getRealPath("/");//获取项目真实地址
                         File file0 = new File(realpath+"File/");

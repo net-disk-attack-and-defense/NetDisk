@@ -62,4 +62,13 @@
         <servlet-name>FileUpload</servlet-name>
         <url-pattern>/FileUpload</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ShowError</servlet-name>
+        <servlet-class>Project1.ShowError</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowError</servlet-name>
+        <url-pattern>/ShowError</url-pattern>
+    </servlet-mapping>
 </web-app>

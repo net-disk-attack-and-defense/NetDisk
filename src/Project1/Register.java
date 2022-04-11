@@ -40,7 +40,7 @@ public class Register extends HttpServlet {
                     DB_Write try01 = new DB_Write(username, password, email, path);
                     register_state = try01.write();
                     switch (register_state) {
-                        case 0 -> response.sendRedirect("ServerError.html");
+                        case 0 -> response.sendRedirect("ServerError.html");//这几个页面不归入ErrorPage1.html页面，防止为登录用户获得session
                         case 1 -> response.sendRedirect("EmailExist.html");
                         case 2 -> response.sendRedirect("SignUpSuccess.html");
                         case 3 -> response.sendRedirect("SignUpFail.html");

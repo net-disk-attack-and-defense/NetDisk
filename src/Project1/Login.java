@@ -61,10 +61,10 @@ public class Login extends HttpServlet {
                         response.sendRedirect("SFP");
                         //request.getRequestDispatcher("SUI").forward(request,response);
                     } else {
-                        response.sendRedirect("wrongpassword.html"); //重定向到密码错误页面
+                        response.sendRedirect("wrongpassword.html"); //重定向到密码错误页面，这个页面不归入ErrorPage1.html页面，防止为登录用户获得session
                     }
                 } else {
-                    response.sendRedirect("wrongusername.html"); //重定向到账号错误页面
+                    response.sendRedirect("wrongusername.html"); //重定向到账号错误页面，这个页面不归入ErrorPage1.html页面，防止为登录用户获得session
                 }
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();

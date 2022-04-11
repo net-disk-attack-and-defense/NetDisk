@@ -28,7 +28,9 @@ public class FileUpload extends HttpServlet {
                     //判断上传的文件是否已存在
                     File file2 = new File(realpath+"File/"+session.getAttribute("username")+"/"+realfilename);
                     if (file2.exists()){
-                        response.sendRedirect("FileExist.html");
+                        session.setAttribute("Error","已存在同名文件");
+                        session.setAttribute("Errormsg","如果需要替换文件请先删除原同名文件后再进行提交");
+                        response.sendRedirect("ShowError");
                     }
                     else {
                         System.out.println(resetfilename);
@@ -36,15 +38,27 @@ public class FileUpload extends HttpServlet {
                             part.write(realpath+"File/"+session.getAttribute("username")+"/"+resetfilename);
                             File file3 = new File(realpath+"File/"+session.getAttribute("username")+"/"+resetfilename);
                             if(file3.exists()) response.sendRedirect("SFP");
-                            else response.sendRedirect("FileUploadFail.html");
+                            else {
+                                session.setAttribute("Error","文件上传失败");
+                                //session.setAttribute("Errormsg","");
+                                response.sendRedirect("ShowError");
+                            }
                         } else {
                             part.write(realpath+"File/"+session.getAttribute("username")+"/"+realfilename);
                             if(file2.exists()) response.sendRedirect("SFP");
-                            else response.sendRedirect("FileUploadFail.html");
+                            else {
+                                session.setAttribute("Error","文件上传失败");
+                                //session.setAttribute("Errormsg","");
+                                response.sendRedirect("ShowError");
+                            }
                         }
                     }
                 }
-                else response.sendRedirect("MkdirFail.html");
+                else {
+                    session.setAttribute("Error","文件夹创建失败");
+                    //session.setAttribute("Errormsg","");
+                    response.sendRedirect("ShowError");
+                }
             }
         }
         else response.sendRedirect("login.html");
