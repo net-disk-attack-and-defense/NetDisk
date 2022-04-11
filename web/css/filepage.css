@@ -53,7 +53,126 @@ body {
     background-color: #fcfcfc;
 }
 
-/* 用户信息 */
+/* 上传文件弹框 */
+#popout_upload {
+    position: fixed;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1000;
+    background: white;
+    width: 450px;
+    padding: 20px 50px 50px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+    transition: 0.5s;
+    visibility: hidden;
+}
+
+#popout_upload.active {
+    visibility: visible;
+    top: 50%;
+}
+
+#popout_upload .content {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+#popout_upload .content h2 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+    color: #0d0d0d;
+    margin: 20px 0 20px 0;
+}
+
+#popout_upload .content .inputbox {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+#popout_upload .content .inputbox input {
+    width: 100%;
+    border: 1px solid rgba(0,0,0,0.2);
+    padding: 15px;
+    outline: none;
+    font-size: 18px;
+}
+
+#popout_upload .content .bt_inputbox {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0);
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 150px;
+    height: 45px;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    font-size: 18px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: sans-serif;
+    box-sizing: border-box;
+    background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4 );
+    background-size: 400%;
+    border-radius: 30px;
+    outline: none;
+}
+#popout_upload .content .bt_inputbox:hover{
+    color: #fff;
+    animation: animation 8s linear infinite;
+}
+@keyframes animation{
+    0%
+    {
+        background-position: 0;
+    }
+    100%
+    {
+        background-position: 400%;
+    }
+}
+#popout_upload .content .bt_inputbox::before{
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4 );
+    background-size: 400%;
+    border-radius: 40px;
+    filter: blur(20px);
+    opacity: 0;
+    transition: .5s;
+}
+#popout_upload .content .bt_inputbox:hover::before{
+    filter: blur(20px);
+    opacity: 1;
+    animation: animation 8s linear infinite;
+}
+#popout_upload .bt_close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+    /* 用户信息 */
 .msg_username {
     font-family: \22Comic Sans MS\22, sans-serif;
     font-size: 34px;
@@ -75,7 +194,7 @@ body {
     background-color: #fff;
     border: none;
     border-radius: 45px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
@@ -84,7 +203,7 @@ body {
 
 .bt_upload:hover {
     background-color: #2EE59D;
-    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    box-shadow: 0 15px 20px rgba(46, 229, 157, 0.4);
     color: #fff;
     transform: translateY(-7px);
 }
@@ -106,7 +225,7 @@ body {
     background-color: #fff;
     border: none;
     border-radius: 45px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
@@ -115,7 +234,7 @@ body {
 
 .bt_download:hover {
     background-color: #2EE59D;
-    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    box-shadow: 0 15px 20px rgba(46, 229, 157, 0.4);
     color: #fff;
     transform: translateY(-7px);
 }
@@ -137,7 +256,7 @@ body {
     background-color: #fff;
     border: none;
     border-radius: 45px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
@@ -146,7 +265,7 @@ body {
 
 .bt_logout:hover {
     background-color: #e52e2e;
-    box-shadow: 0px 15px 20px rgba(229, 46, 46, 0.4);
+    box-shadow: 0 15px 20px rgba(229, 46, 46, 0.4);
     color: #fff;
     transform: translateY(-7px);
 }
@@ -169,7 +288,7 @@ body {
     background-color: #fff;
     border: none;
     border-radius: 45px;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
@@ -178,7 +297,7 @@ body {
 
 .bt_delete:hover {
     background-color: #e52e2e;
-    box-shadow: 0px 15px 20px rgba(229, 46, 46, 0.4);
+    box-shadow: 0 15px 20px rgba(229, 46, 46, 0.4);
     color: #fff;
     transform: translateY(-7px);
 }
