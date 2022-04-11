@@ -25,13 +25,24 @@ public class FileUpload extends HttpServlet {
                     String resetfilename =request.getParameter("resetfilename");//用户输入的名字
                     Part part = request.getPart("uploadfile");
                     String realfilename =  part.getSubmittedFileName();//文件真实的名字
-                    part.write(realpath+"File/"+session.getAttribute("username")+"/"+realfilename);
-                    File file2 =new File(realpath+"File/"+session.getAttribute("username")+"/"+realfilename);
-                    if(file2.exists()){
-                        session.setAttribute(realfilename,resetfilename);
-                        response.sendRedirect("SFP");
+                    //判断上传的文件是否已存在
+                    File file2 = new File(realpath+"File/"+session.getAttribute("username")+"/"+realfilename);
+                    if (file2.exists()){
+                        response.sendRedirect("FileExist.html");
                     }
-                    else response.sendRedirect("FileUploadFail.html");
+                    else {
+                        System.out.println(resetfilename);
+                        if (resetfilename.length()!=0){
+                            part.write(realpath+"File/"+session.getAttribute("username")+"/"+resetfilename);
+                            File file3 = new File(realpath+"File/"+session.getAttribute("username")+"/"+resetfilename);
+                            if(file3.exists()) response.sendRedirect("SFP");
+                            else response.sendRedirect("FileUploadFail.html");
+                        } else {
+                            part.write(realpath+"File/"+session.getAttribute("username")+"/"+realfilename);
+                            if(file2.exists()) response.sendRedirect("SFP");
+                            else response.sendRedirect("FileUploadFail.html");
+                        }
+                    }
                 }
                 else response.sendRedirect("MkdirFail.html");
             }

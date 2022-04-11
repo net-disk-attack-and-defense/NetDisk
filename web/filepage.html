@@ -21,26 +21,17 @@
         <table>
             <tr>
                 <td width="30px">勾选</td>
-                <td width="30px">序号</td>
+                <td width="40px">用户命名</td>
                 <td>文件名</td>
             </tr>
-            <tr>
+            <tr th:each="f,t:${session.allfiles}">
                 <td>
                     <label> <!--尚未了解checkbox如何被后台读取-->
                         <input checked="" class="checkbox" type="checkbox">
                     </label>
                 </td>
-                <td>2</td> <!--按顺序顺延-->
-                <td>a.txt</td> <!--thymeleaf读取-->
-            </tr>
-            <tr>
-                <td>
-                    <label>
-                        <input checked="" class="checkbox" type="checkbox">
-                    </label>
-                </td>
-                <td>2</td>
-                <td>b.txt</td>
+                <td th:text="${t.count}">NULL</td>
+                <td th:text="${f.getName()}">NULL</td> <!--thymeleaf读取-->
             </tr>
         </table>
         <div id="popout_upload">

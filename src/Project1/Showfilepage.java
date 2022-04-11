@@ -3,6 +3,7 @@ package Project1;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 
 public class Showfilepage extends ViewBaseServlet {
@@ -15,8 +16,17 @@ public class Showfilepage extends ViewBaseServlet {
                 Referer_Check RC = new Referer_Check(request.getHeader("referer"), "NetDisk/login.html");
                 Referer_Check RC1 = new Referer_Check(request.getHeader("referer"), "NetDisk/filepage.html");
                 Referer_Check RC2 = new Referer_Check(request.getHeader("referer"), "NetDisk/SFP");
-                if (!RC.check() || !RC1.check() || !RC2.check()) {  //验证来源链接
+                Referer_Check RC3 = new Referer_Check(request.getHeader("referer"), "NetDisk/FileExist.html");
+                Referer_Check RC4 = new Referer_Check(request.getHeader("referer"), "NetDisk/FileUploadFail.html");
+                if (!RC.check() || !RC1.check() || !RC2.check() || !RC3.check() || !RC4.check()) {  //验证来源链接
                     if (session.getAttribute("username") != null) {
+                        String realpath = request.getServletContext().getRealPath("/");//获取项目真实地址
+                        File file0 = new File(realpath+"File/");
+                        file0.mkdir();
+                        File file1 = new File(realpath+"File/"+session.getAttribute("username")+"/");
+                        file1.mkdir();
+                        File[] files = file1.listFiles();
+                        session.setAttribute("allfiles", files);
                         super.processTemplate("filepage", request, response);
                     }
                 }
