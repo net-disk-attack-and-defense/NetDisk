@@ -10,8 +10,6 @@ public class Register extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         int SpiderState = 0;
         try {
             User_Agent_Check uAC = new User_Agent_Check(request.getHeader("user-agent"));

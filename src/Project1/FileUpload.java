@@ -10,7 +10,6 @@ import java.io.IOException;
 public class FileUpload extends HttpServlet {
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(false);
         if (session!=null){
             User_Agent_Check uAC = new User_Agent_Check(request.getHeader("user-agent"));

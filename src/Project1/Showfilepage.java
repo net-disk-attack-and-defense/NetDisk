@@ -8,8 +8,6 @@ import java.io.IOException;
 
 public class Showfilepage extends ViewBaseServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(false);//不创建新ID
         if (session != null) { //判断session是否存在
             if (!session.isNew()) {//判断session是否新的，但似乎无用

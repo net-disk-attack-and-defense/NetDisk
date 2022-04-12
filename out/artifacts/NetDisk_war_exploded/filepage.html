@@ -29,7 +29,7 @@
             <tr th:each="f,t:${session.allfiles}">
                 <td>
                     <label> <!--尚未了解checkbox如何被后台读取-->
-                        <input checked="" class="checkbox" type="checkbox">
+                        <input class="checkbox" type="checkbox">
                     </label>
                 </td>
                 <td th:text="${t.count}">NULL</td>
