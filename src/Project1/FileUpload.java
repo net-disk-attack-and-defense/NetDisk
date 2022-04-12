@@ -25,7 +25,7 @@ public class FileUpload extends HttpServlet {
                     Part part = request.getPart("uploadfile");
                     String realfilename =  part.getSubmittedFileName();//文件真实的名字
                     //判断上传的文件是否已存在
-                    File file2 = new File(realpath+"File/"+session.getAttribute("username")+"/"+realfilename);
+                    File file2 = new File(realpath+"WEB-INF/File/"+session.getAttribute("username")+"/"+realfilename);
                     if (file2.exists()){
                         session.setAttribute("Error","已存在同名文件");
                         session.setAttribute("Errormsg","如果需要替换文件请先删除原同名文件后再进行提交");
@@ -34,8 +34,8 @@ public class FileUpload extends HttpServlet {
                     else {
                         System.out.println(resetfilename);
                         if (resetfilename.length()!=0){
-                            part.write(realpath+"File/"+session.getAttribute("username")+"/"+resetfilename);
-                            File file3 = new File(realpath+"File/"+session.getAttribute("username")+"/"+resetfilename);
+                            part.write(realpath+"WEB-INF/File/"+session.getAttribute("username")+"/"+resetfilename);
+                            File file3 = new File(realpath+"WEB-INF/File/"+session.getAttribute("username")+"/"+resetfilename);
                             if(file3.exists()) response.sendRedirect("SFP");
                             else {
                                 session.setAttribute("Error","文件上传失败");
@@ -43,7 +43,7 @@ public class FileUpload extends HttpServlet {
                                 response.sendRedirect("ShowError");
                             }
                         } else {
-                            part.write(realpath+"File/"+session.getAttribute("username")+"/"+realfilename);
+                            part.write(realpath+"WEB-INF/File/"+session.getAttribute("username")+"/"+realfilename);
                             if(file2.exists()) response.sendRedirect("SFP");
                             else {
                                 session.setAttribute("Error","文件上传失败");

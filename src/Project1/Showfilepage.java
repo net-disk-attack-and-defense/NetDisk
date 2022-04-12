@@ -18,7 +18,7 @@ public class Showfilepage extends ViewBaseServlet {
                 Referer_Check RC3 = new Referer_Check(request.getHeader("referer"), "NetDisk/ShowError");
                 if (!RC.check() || !RC1.check() || !RC2.check() || !RC3.check()) {  //验证来源链接
                     if (session.getAttribute("username") != null) {
-                        String realpath = request.getServletContext().getRealPath("/");//获取项目真实地址
+                        String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
                         File file0 = new File(realpath+"File/");
                         file0.mkdir();
                         File file1 = new File(realpath+"File/"+session.getAttribute("username")+"/");
@@ -28,7 +28,7 @@ public class Showfilepage extends ViewBaseServlet {
                         super.processTemplate("filepage", request, response);
                     }
                 }
-            } else response.sendError(403, "禁止访问");
+            } else response.sendRedirect("403.html");
         } else response.sendRedirect("login.html");//如果session过期
     }
 }
