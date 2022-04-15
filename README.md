@@ -1,6 +1,6 @@
 # team
 
-# **$\textcolor{Magenta}{技术选型} $**
+# 技术选型
 
 前期：Servlet+HTML+JS+CSS+JDBC
 
@@ -16,7 +16,7 @@
 
 
 
-# $\textcolor{Magenta}{工具版本}$
+# 工具版本
 
 Ubuntu 20
 
@@ -28,7 +28,7 @@ Vue 2 —— Vue2.96
 
 
 
-# $\textcolor{Magenta}{组内分工}$
+# 组内分工
 
 前期：混合
 
@@ -36,43 +36,41 @@ Vue 2 —— Vue2.96
 
 
 
-# $\textcolor{Magenta}{任务目标}$
+# 任务目标
 
-## $\textcolor{RedOrange}{基本功能}$
+## 基本功能
 
-### $\textcolor{Green}{注册}$
+### 注册
 
 将用户提交的username、email、password存入数据库
 
-### $\textcolor{Green}{登录}$
+### 登录
 
 从数据库查询用户数据并判定是否登录成功
 
-### $\textcolor{Green}{上传、下载、删除文件}$
+### 上传、下载、删除文件
 
 允许用户上传、下载、删除自己网盘中的文件
 
 
 
-## $\textcolor{RedOrange}{防守}$
+## 防守
 
-### $\textcolor{Green}{防止SQL注入（（前）后端）}$
+### 防止SQL注入（（前）后端）
 
-
-
-### $\textcolor{Green}{限制数据（前后端）}$
+### 限制数据（前后端）
 
 1、数据长度限制（过长/过短）
 
 2、数据类型限制
 
-### $\textcolor{Green}{限制权限（后端）}$
+### 限制权限（后端）
 
 1、sessionID校验
 
 2、session.name校验
 
-###$\textcolor{Green}{限制访问（后端）}$
+### 限制访问（后端）
 
 1、限制来源链接
 
@@ -80,41 +78,41 @@ Vue 2 —— Vue2.96
 
 
 
-## $\textcolor{RedOrange}{进攻}$
+## 进攻
 
-### $\textcolor{Green}{SQL注入}$
+### SQL注入
 
-### $\textcolor{Green}{DDos}$
+### DDos
 
-### $\textcolor{Green}{写入非常规数据}$
+### 写入非常规数据
 
 1、过长过短数据
 
 2、提交其他类型数据
 
-### $\textcolor{Green}{跨越权限}$
+### 跨越权限
 
 1、使session.name与post请求不一致
 
 2、直接访问地址
 
-### $\textcolor{Green}{反反爬}$
+### 反反爬
 
 
 
-# $\textcolor{Magenta}{项目结构}$
+# 项目结构
 
-## $\textcolor{RedOrange}{前端}$
+## 前端
 
-### $\textcolor{Green}{HTML}$
+### HTML
 
-#### $\textcolor{SkyBlue}{index.html  菜单页（导航页）}$
+#### index.html  菜单页（导航页）
 
 1、可跳转用户登录页、用户注册页
 
 
 
-#### $\textcolor{SkyBlue}{register.html (SignUpSuccess.html)  用户注册页}$
+#### register.html (SignUpSuccess.html)  用户注册页 
 
 1、可跳转用户登录页、菜单页
 
@@ -130,7 +128,7 @@ Vue 2 —— Vue2.96
 
 
 
-#### $\textcolor{SkyBlue}{login.html  用户登录页}$
+#### login.html  用户登录页 
 
 1、可跳转用户登录页、菜单页
 
@@ -146,7 +144,7 @@ Vue 2 —— Vue2.96
 
 
 
-#### $\textcolor{SkyBlue}{filepage.html  文件操作页}$
+#### filepage.html  文件操作页 
 
 1、显示用户账号信息
 
@@ -160,7 +158,7 @@ Vue 2 —— Vue2.96
 
 6、提供登出按钮，可向logout.class发出请求
 
-#### $\textcolor{SkyBlue}{404.html 403.html (error.html*n)  错误页}$
+#### 404.html 403.html (error.html*n)  错误页 
 
 1、提供404、403错误返回页面，并允许返回菜单页
 
@@ -176,39 +174,39 @@ Vue 2 —— Vue2.96
 
 （5）密码错误
 
-### $\textcolor{Green}{CSS}$
+### CSS
 
 对应页面的CSS
 
-### $\textcolor{Green}{JS}$
+### JS
 
-#### $\textcolor{SkyBlue}{register.js}$
-
-前端验证用户输入账号密码长度是否符合要求
-
-#### $\textcolor{SkyBlue}{login.js}$
+#### register.js 
 
 前端验证用户输入账号密码长度是否符合要求
 
-## $\textcolor{RedOrange}{后端}$
+#### login.js
 
-### $\textcolor{Green}{过滤器}$
+前端验证用户输入账号密码长度是否符合要求
 
-#### $\textcolor{SkyBlue}{EncodingFilter.class}$
+## 后端
+
+### 过滤器
+
+#### EncodingFilter.class
 
 将除了json, js, css, ico, jpg, png, html之外的请求设置为UTF-8编码
 
 
 
-### $\textcolor{Green}{数据库操作}$
+### 数据库操作
 
-#### $\textcolor{SkyBlue}{DB_Connect.class}$
+#### DB_Connect.class
 
 1、填写数据库信息（可使用properties文件替代）
 
 2、获取连接
 
-#### $\textcolor{SkyBlue}{DB_Write.class}$
+#### DB_Write.class
 
 1、调用Username_Check.class查询账号是否已被注册
 
@@ -216,7 +214,7 @@ Vue 2 —— Vue2.96
 
 3、防止sql注入
 
-####  $\textcolor{SkyBlue}{DB_Delete.class}$
+#### DB_Delete.class （可选）
 
 1、调用Username_Check.class查询账号是否存在
 
@@ -226,9 +224,9 @@ Vue 2 —— Vue2.96
 
 
 
-### $\textcolor{Green}{注册}$
+### 注册
 
-#### $\textcolor{SkyBlue}{Register.class}$
+#### Register.class
 
 1、调用User_Agent_Check.class检查请求的user-agent字段，验证是否来自浏览器的请求（可被轻松绕过）
 
@@ -240,9 +238,9 @@ Vue 2 —— Vue2.96
 
 
 
-### $\textcolor{Green}{登录}$
+### 登录
 
-#### $\textcolor{SkyBlue}{Login.class}$
+#### Login.class
 
 1、调用User_Agent_Check.class检查请求的user-agent字段，验证是否来自浏览器的请求（可被轻松绕过）
 
@@ -260,9 +258,9 @@ Vue 2 —— Vue2.96
 
 
 
-### $\textcolor{Green}{登出}$
+### 登出
 
-#### $\textcolor{SkyBlue}{Logout.class}$
+#### Logout.class
 
 1、销毁session
 
@@ -270,9 +268,9 @@ Vue 2 —— Vue2.96
 
 
 
-### $\textcolor{Green}{文件展示}$
+### 文件展示
 
-#### $\textcolor{SkyBlue}{Showfilepage.class}$
+#### Showfilepage.class
 
 1、判断是否存在session
 
@@ -288,9 +286,9 @@ Vue 2 —— Vue2.96
 
 
 
-### $\textcolor{Green}{文件上传}$
+### 文件上传
 
-#### $\textcolor{SkyBlue}{FileUpload.class}$
+#### FileUpload.class
 
 1、判断是否存在session，session.name
 
@@ -304,23 +302,23 @@ Vue 2 —— Vue2.96
 
 
 
-### $\textcolor{Green}{文件下载}$
+### 文件下载
 
-#### $\textcolor{SkyBlue}{FileDownload.class}$
-
-
-
-
-
-### $\textcolor{Green}{文件删除}$
-
-#### $\textcolor{SkyBlue}{FileDelete.class}$
+#### FileDownload.class
 
 
 
 
 
-### $\textcolor{Green}{文件查询(可选)}$
+### 文件删除
 
-#### $\textcolor{SkyBlue}{FileSearch.class}$
+#### FileDelete.class
+
+
+
+
+
+### 文件查询(可选)
+
+#### FileSearch.class
 
