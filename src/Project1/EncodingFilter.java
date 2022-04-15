@@ -11,10 +11,9 @@ import java.io.IOException;
 public class EncodingFilter implements Filter {
     /**
      * @param filterConfig
-     * @throws ServletException
      */
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
     }
 
     /**
