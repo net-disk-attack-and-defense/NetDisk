@@ -8,6 +8,9 @@ import java.io.IOException;
 
 public class Showfilepage extends ViewBaseServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //TODO 后端需增添校验防止xss脚本攻击
+        //TODO 需对文件内容和后缀进行校验，防止文件上传漏洞，顺便完成后缀自动补全功能
+        //TODO 限制用户操作频率和最大操作数
         HttpSession session = request.getSession(false);//不创建新ID
         if (session != null) { //判断session是否存在
             if (!session.isNew()) {//判断session是否新的，但似乎无用
