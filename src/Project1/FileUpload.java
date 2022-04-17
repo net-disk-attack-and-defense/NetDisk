@@ -58,8 +58,7 @@ public class FileUpload extends HttpServlet {
                     //session.setAttribute("Errormsg","");
                     response.sendRedirect("ShowError");
                 }
-            }
-        }
-        else response.sendRedirect("login.html");
+            } else response.sendRedirect("403.html");
+        } else response.sendRedirect("login.html");
     }
 }
