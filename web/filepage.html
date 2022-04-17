@@ -52,7 +52,7 @@
                         <input type="file" name="uploadfile">
                     </div>
                     <div class="inputbox">
-                        <input type="text" name="resetfilename" placeholder="输入文件名，需加上后缀（.xxx）">
+                        <input type="text" name="resetfilename" placeholder="输入文件名，需加上后缀（.xxx）" onkeyup="this.value=this.value.replace(/[(/,<>: |'\\)]/g,'')">
                     </div>
                     <button class="bt_inputbox">Upload</button>
                 </form>
