@@ -24,34 +24,39 @@ public class FileUpload extends HttpServlet {
                     String resetfilename =request.getParameter("resetfilename");//用户输入的名字
                     Part part = request.getPart("uploadfile");
                     String realfilename =  part.getSubmittedFileName();//文件真实的名字
-                    //判断上传的文件是否已存在
-                    File file2 = new File(realpath+"WEB-INF/File/"+session.getAttribute("username")+"/"+realfilename);
-                    if (file2.exists()){
-                        session.setAttribute("Error","已存在同名文件");
-                        session.setAttribute("Errormsg","如果需要替换文件请先删除原同名文件后再进行提交");
-                        response.sendRedirect("ShowError");
-                    }
-                    else {
-                        System.out.println(resetfilename);
-                        if (resetfilename.length()!=0){
+                    if (resetfilename.length()!=0){
+                        File file2 = new File(realpath+"WEB-INF/File/"+session.getAttribute("username")+"/"+resetfilename);
+                        if (file2.exists()){ //判断上传的文件是否已存在
+                            session.setAttribute("Error","已存在同名文件");
+                            session.setAttribute("Errormsg","如果需要替换文件请先删除原同名文件后再进行提交");
+                            response.sendRedirect("ShowError");
+                        }else{
                             part.write(realpath+"WEB-INF/File/"+session.getAttribute("username")+"/"+resetfilename);
+                            //上传完后验证是否上传成功
                             File file3 = new File(realpath+"WEB-INF/File/"+session.getAttribute("username")+"/"+resetfilename);
                             if(file3.exists()) response.sendRedirect("SFP");
                             else {
                                 session.setAttribute("Error","文件上传失败");
-                                //session.setAttribute("Errormsg","");
                                 response.sendRedirect("ShowError");
                             }
-                        } else {
+                        }
+
+                    } else {
+                        File file2 = new File(realpath+"WEB-INF/File/"+session.getAttribute("username")+"/"+realfilename);
+                        if (file2.exists()){ //判断上传的文件是否已存在
+                            session.setAttribute("Error","已存在同名文件");
+                            session.setAttribute("Errormsg","如果需要替换文件请先删除原同名文件后再进行提交");
+                            response.sendRedirect("ShowError");
+                        }else {
                             part.write(realpath+"WEB-INF/File/"+session.getAttribute("username")+"/"+realfilename);
                             if(file2.exists()) response.sendRedirect("SFP");
                             else {
                                 session.setAttribute("Error","文件上传失败");
-                                //session.setAttribute("Errormsg","");
                                 response.sendRedirect("ShowError");
                             }
                         }
                     }
+
                 }
                 else {
                     session.setAttribute("Error","文件夹创建失败");
