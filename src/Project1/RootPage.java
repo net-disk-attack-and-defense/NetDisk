@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 
-public class Showfilepage extends ViewBaseServlet {
+public class RootPage extends ViewBaseServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //TODO 后端需增添校验防止xss脚本攻击
         //TODO 需对文件内容和后缀进行校验，防止文件上传漏洞，顺便完成后缀自动补全功能

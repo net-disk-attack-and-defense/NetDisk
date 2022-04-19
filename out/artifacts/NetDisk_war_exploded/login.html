@@ -13,8 +13,8 @@
         <div class="header">Login in</div>
         <div class="form-wrapper">
             <form action="/NetDisk/login" onsubmit="check()" method="post">
-                <input type="email"    id="email"    name="email"    placeholder="email"    class="input-item" onkeyup="this.value=this.value.replace(/[, ]/g,'')" required="required" autofocus="autofocus">
-                <input type="password" id="password" name="password" placeholder="password" class="input-item" onkeyup="this.value=this.value.replace(/[, ]/g,'')" required="required">
+                <input type="email"    id="email"    name="email"    placeholder="email"    class="input-item" onkeyup="this.value=this.value.replace(/[, <>/|'\\]/g,'')" required="required" autofocus="autofocus">
+                <input type="password" id="password" name="password" placeholder="password" class="input-item" onkeyup="this.value=this.value.replace(/[, <>/|'\\]/g,'')" required="required">
                 <button type="submit" name="bt_login" class="btng">Login in</button>
             </form>
         </div>

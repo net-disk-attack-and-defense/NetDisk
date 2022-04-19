@@ -67,3 +67,4 @@ public class FileUpload extends HttpServlet {
         } else response.sendRedirect("login.html");
     }
 }
+//生成三个随机数

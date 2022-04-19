@@ -9,6 +9,16 @@
         <location>/404.html</location>
     </error-page>
 
+    <error-page>
+        <error-code>403</error-code>
+        <location>/403.html</location>
+    </error-page>
+
+    <error-page>
+        <error-code>405</error-code>
+        <location>/405.html</location>
+    </error-page>
+
     <context-param>
         <param-name>view-prefix</param-name>
         <param-value>/</param-value>
@@ -70,5 +80,32 @@
     <servlet-mapping>
         <servlet-name>ShowError</servlet-name>
         <url-pattern>/ShowError</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RootPage</servlet-name>
+        <servlet-class>Project1.RootPage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RootPage</servlet-name>
+        <url-pattern>/RootPage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RootShowUsers</servlet-name>
+        <servlet-class>Project1.RootShowUsers</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RootShowUsers</servlet-name>
+        <url-pattern>/RSU</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RootAddUsers</servlet-name>
+        <servlet-class>Project1.RootAddUsers</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RootAddUsers</servlet-name>
+        <url-pattern>/RAU</url-pattern>
     </servlet-mapping>
 </web-app>
