@@ -35,7 +35,7 @@
             <tr th:each="f,t:${session.users[0]}">
                 <td th:text="${t.count}">NULL</td>
                 <td th:text="${session.users[1][(t.count)-1]}">NULL</td> <!--thymeleaf读取name-->
-                <td th:text="${session.users[2][(t.count)-1]}">NULL</td> <!--thymeleaf读取email-->
+                <td th:text="${session.users[2][(t.count)-1]}">NULL</td> <!--thymeleaf读取email0-->
             </tr>
         </table>
         <div id="popout_operate">

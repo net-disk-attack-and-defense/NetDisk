@@ -15,7 +15,7 @@ public class RootPage extends ViewBaseServlet{
         if (session != null) { //判断session是否存在
             if (!session.isNew()) {//判断session是否新的，但似乎无用
                 if (request.getHeader("referer")!=null){
-                    System.out.println(request.getHeader("referer"));
+                    System.out.println("RP:"+request.getHeader("referer"));
                     Referer_Check RC = new Referer_Check(request.getHeader("referer"), "NetDisk/login.html");
                     Referer_Check RC1 = new Referer_Check(request.getHeader("referer"), "NetDisk/filepage.html");
                     Referer_Check RC2 = new Referer_Check(request.getHeader("referer"), "NetDisk/SFP");//TODO 此处函数有待优化

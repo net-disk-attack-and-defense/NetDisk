@@ -17,12 +17,14 @@ public class RootShowUsers extends ViewBaseServlet{
         HttpSession session = request.getSession(false);//不创建新ID
         if (session != null) { //判断session是否存在
             if (!session.isNew() && request.getHeader("referer")!=null && session.getAttribute("username") != null) {//判断session是否新的，但似乎无用
-                System.out.println(request.getHeader("referer"));
                 Referer_Check RC = new Referer_Check(request.getHeader("referer"), "NetDisk/RootPage.html");
                 Referer_Check RC1 = new Referer_Check(request.getHeader("referer"), "NetDisk/RootShowUsers.html");
                 Referer_Check RC2 = new Referer_Check(request.getHeader("referer"), "NetDisk/RSU");//TODO 此处函数有待优化
                 Referer_Check RC3 = new Referer_Check(request.getHeader("referer"), "NetDisk/ShowError");
-                if ((!RC.check() || !RC1.check() || !RC2.check() || !RC3.check()) && session.getAttribute("username").equals("ROOT")) {  //验证来源链接
+                Referer_Check RC4 = new Referer_Check(request.getHeader("referer"), "NetDisk/RootEmailExist.html");
+                Referer_Check RC5 = new Referer_Check(request.getHeader("referer"), "NetDisk/RootSignUpSuccess.html");
+                Referer_Check RC6 = new Referer_Check(request.getHeader("referer"), "NetDisk/RootSignUpFail.html");
+                if ((!RC.check() || !RC1.check() || !RC2.check() || !RC3.check() || !RC4.check() || !RC5.check() || !RC6.check()) && session.getAttribute("username").equals("ROOT")) {  //验证来源链接
                     //TODO 将用户姓名邮箱传入session.users
                     Connection conn = null;
                     PreparedStatement ps = null;
