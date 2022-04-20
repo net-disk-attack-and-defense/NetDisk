@@ -19,7 +19,6 @@ public class RootShowUsers extends ViewBaseServlet{
             if (!session.isNew() && request.getHeader("referer")!=null && session.getAttribute("username") != null) {//判断session是否新的，但似乎无用
                 Referer_Check RC = new Referer_Check(request.getHeader("referer"), "NetDisk/RootSignUpFail.html","NetDisk/RootSignUpSuccess.html","NetDisk/RootEmailExist.html","NetDisk/ShowError","NetDisk/RSU","NetDisk/RootPage.html","NetDisk/RootShowUsers.html");
                 if (!RC.check() && session.getAttribute("username").equals("ROOT")) {  //验证来源链接
-                    //TODO 将用户姓名邮箱传入session.users
                     Connection conn = null;
                     PreparedStatement ps = null;
                     ResultSet rs = null;

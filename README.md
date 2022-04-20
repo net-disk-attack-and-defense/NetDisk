@@ -20,7 +20,7 @@
 
 Ubuntu 20
 
-Tomcat 8 —— Tomcat 8.5.78 (待定)
+Tomcat 8 —— Tomcat 8.5.78
 
 JDK 17 （待定）
 
@@ -52,9 +52,9 @@ Vue 2 —— Vue2.96
 
 允许用户上传、下载、删除自己网盘中的文件
 
-### 管理员权限（可选）
+### 管理员权限
 
-设置管理员用户，该用户有查看、管理用户信息，（查看、管理用户文件，）查看网页日志信息的权限
+设置管理员用户，该用户有查看、管理用户信息，查看、管理用户文件，查看网页日志信息的权限
 
 ## 防守
 
@@ -168,31 +168,33 @@ Vue 2 —— Vue2.96
 
 
 
-#### Admin.html  管理员操作页（可选）
+#### RootPage.html  管理员菜单页
 
-1、统计用户数量并且显示用户信息，允许增添/删除用户
+1、统计用户数量并且显示用户信息，允许增添/删除用户（RootShowUsers.html）
 
-2、允许查看并编辑对应用户的文件
+2、允许查看并编辑对应用户的文件(RootShowUserFile.html)
 
 3、允许查看网页日志信息
 
 
 
-#### 404.html 403.html (error.html*n)  错误页 
+#### 404.html 403.html 405.html (error.html*n)  错误页 
 
-1、提供404、403错误返回页面，并允许返回菜单页
+1、提供404、403、405错误返回页面，并允许返回菜单页
 
 2、提供多种错误页面
 
 （1）服务器内部错误
 
-（2）注册失败
+（2）（管理员）注册失败
 
-（3）用户名已存在
+（3）（管理员）注册时邮箱已存在
 
 （4）账号错误
 
 （5）密码错误
+
+（6）管理员删除用户失败
 
 ### CSS
 
@@ -314,7 +316,7 @@ Vue 2 —— Vue2.96
 
 2、调用Referer_Check.class检查请求的referer字段，验证是否来自filepage.html的请求（可被轻松绕过）
 
-3、创建用户对应文件夹
+3、以用户邮箱邮箱命名创建用户对应文件夹
 
 4、判断是否有重名文件
 
@@ -346,21 +348,57 @@ Vue 2 —— Vue2.96
 
 
 
-### 管理员显示用户信息(可选)
+### 管理员显示用户信息
 
+#### RootShowUsers.class
+1、判断是否存在session，session是否为新
 
+2、调用Referer_Check.class检查请求的referer字段，验证是否来自filepage.html的请求（可被轻松绕过）
 
+3、判断session.username是否为ROOT
 
-### 管理员操作用户信息(可选)
+4、从数据库中查询用户信息并存入session.users
 
+5、渲染RootShowUsers.html
 
+### 管理员操作用户信息
 
-### 管理员显示用户文件(可选)
+#### RootAddUsers.class
+1、由于注册用户操作本身不需要管理员权限，因此未对管理员权限进行校验（尚不清楚是否有其他副作用）
 
+2、对注册信息进行长度验证，以及禁止注册管理员账户
+#### RootDeleteUser.class
+1、判断是否存在session，session是否为新
 
+2、调用Referer_Check.class检查请求的referer字段，验证是否来自filepage.html的请求（可被轻松绕过）
 
-### 管理员操作用户文件(可选)
+3、判断session.username是否为ROOT
 
+4、判断前端传来的欲删除用户是否为空，是否在数据库中存在
 
+5、删除用户，删除用户对应文件夹
+### 管理员显示用户文件
 
+#### RootShowUserFile.class
+1、判断是否存在session，session是否为新
+
+2、调用Referer_Check.class检查请求的referer字段，验证是否来自filepage.html的请求（可被轻松绕过）
+
+3、判断session.username是否为ROOT
+
+4、TODO 对前端传来的邮箱进行后端校验
+
+5、创建文件夹并将文件目录传入session.R_allfiles
+
+6、渲染RootShowUserFile.html
+### 管理员操作用户文件
+
+#### RootFileUpload.class
+1、判断是否存在session，session是否为新
+
+2、调用Referer_Check.class检查请求的referer字段，验证是否来自filepage.html的请求（可被轻松绕过）
+
+3、判断session.email是否为ROOT@ROOT
+
+4、创建文件夹，判断本地是否已经有该文件，并上传文件
 ### 管理员显示日志信息(可选)

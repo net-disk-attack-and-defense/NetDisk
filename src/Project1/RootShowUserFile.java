@@ -35,6 +35,7 @@ public class RootShowUserFile extends ViewBaseServlet{
                     String SF_name = request.getParameter("bt_ShowFileName");
                     session.setAttribute("R_username",SF_name);
                     session.setAttribute("R_email",SF_email);
+                    //TODO 需要对email的内容进行后端筛查（重要）以及判断是否为空
                     String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
                     File file0 = new File(realpath+"File/");
                     file0.mkdir();
