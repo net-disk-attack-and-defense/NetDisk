@@ -34,41 +34,40 @@
             </tr>
             <tr th:each="f,t:${session.users[0]}" onmouseover="ShowBgColor()" onmouseout="ClearBgColor()" onclick="popout_RCU()">
                 <td th:text="${t.count}">NULL</td>
-                <td th:text="${session.users[1][(t.count)-1]}">NULL</td> <!--thymeleaf读取name-->
-                <td th:text="${session.users[2][(t.count)-1]}">NULL</td> <!--thymeleaf读取email0-->
+                <td th:text="${session.users[1][(t.count)-1]}" name = "name">NULL</td> <!--thymeleaf读取name-->
+                <td th:text="${session.users[2][(t.count)-1]}" name = "email">NULL</td> <!--thymeleaf读取email-->
             </tr>
         </table>
-        <div id="popout_operate">
-            <div class="content">
-                <h2>增添用户</h2>
-                <form action="/NetDisk/RAU" onsubmit="check()" method="post">
-                    <div class="inputbox">
-                        <input type="text"     id="username" name="username" placeholder="username" class="input-item" onkeyup="this.value=this.value.replace(/[, <>/|'\\]/g,'')" required="required" autofocus="autofocus">
-                    </div>
-                    <div class="inputbox">
-                        <input type="password" id="password" name="password" placeholder="password" class="input-item" onkeyup="this.value=this.value.replace(/[, <>/|'\\]/g,'')" required="required">
-                    </div>
-                    <div class="inputbox">
-                        <input type="email"    id="email"    name="email"    placeholder="email"    class="input-item" onkeyup="this.value=this.value.replace(/[, <>/|'\\]/g,'')" required="required">
-                    </div>
-                    <button class="bt_inputbox">增添用户</button>
-                </form>
-            </div>
-            <a href="RSU" class="bt_close" onclick="popoutToggle()"><img src="image/close.png" width="45" height="45"></a>
+    </div>
+    <div id="popout_operate">
+        <div class="content">
+            <h2>增添用户</h2>
+            <form action="/NetDisk/RAU" onsubmit="check()" method="post">
+                <div class="inputbox">
+                    <input type="text"     id="username" name="username" placeholder="username" class="input-item" onkeyup="this.value=this.value.replace(/[, <>/|'\\]/g,'')" required="required" autofocus="autofocus">
+                </div>
+                <div class="inputbox">
+                    <input type="password" id="password" name="password" placeholder="password" class="input-item" onkeyup="this.value=this.value.replace(/[, <>/|'\\]/g,'')" required="required">
+                </div>
+                <div class="inputbox">
+                    <input type="email"    id="email"    name="email"    placeholder="email"    class="input-item" onkeyup="this.value=this.value.replace(/[, <>/|'\\]/g,'')" required="required">
+                </div>
+                <button class="bt_inputbox">增添用户</button>
+            </form>
         </div>
-
-        <div id="popout_user">
-            <div class="content">
-                <h2>选择操作</h2>
-                <form action="/NetDisk/RSUF" onsubmit="check()" method="post">
-                    <button class="bt_RSF">查看文件</button>
-                </form>
-                <form action="/NetDisk/RDU" onsubmit="check()" method="post">
-                    <button class="bt_RDU">删除用户</button>
-                </form>
-            </div>
-            <a href="RSU" class="bt_close" onclick="popoutToggle()"><img src="image/close.png" width="45" height="45"></a>
+        <a href="RSU" class="bt_close" onclick="popoutToggle()"><img src="image/close.png" width="45" height="45"></a>
+    </div>
+    <div id="popout_user">
+        <div class="content">
+            <h2>选择操作</h2>
+            <form action="/NetDisk/RSUF" onsubmit="check()" method="post">
+                <button class="bt_RSF">查看文件</button>
+            </form>
+            <form action="/NetDisk/RDU" onsubmit="check()" method="post">
+                <button class="bt_RDU" id="bt_del" name="bt_del" onclick="submitid()" value="">删除用户</button>
+            </form>
         </div>
+        <a href="RSU" class="bt_close" onclick="popoutToggle()"><img src="image/close.png" width="45" height="45"></a>
     </div>
 </div>
 </body>

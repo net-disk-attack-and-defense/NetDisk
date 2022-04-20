@@ -5,7 +5,8 @@ function popout_RSU() {
 
 function popout_RCU() {
     const popout = document.getElementById("popout_user");
-    popout.classList.toggle('active')
+    popout.classList.toggle('active');
+    sessionStorage.setItem("delid",event.srcElement.parentElement.lastElementChild.innerHTML);
 }
 
 function ShowBgColor() {
@@ -20,4 +21,9 @@ function ClearBgColor() {
         var tr = event.srcElement.parentElement;
         tr.style.backgroundColor = null;
     }
+}
+
+function submitid() {
+    var delid = sessionStorage.getItem("delid");
+    document.getElementById("bt_del").value = delid;
 }

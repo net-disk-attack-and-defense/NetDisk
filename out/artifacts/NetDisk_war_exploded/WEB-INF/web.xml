@@ -108,4 +108,22 @@
         <servlet-name>RootAddUsers</servlet-name>
         <url-pattern>/RAU</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RootDeleteUser</servlet-name>
+        <servlet-class>Project1.RootDeleteUser</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RootDeleteUser</servlet-name>
+        <url-pattern>/RDU</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RootShowUserFile</servlet-name>
+        <servlet-class>Project1.RootShowUserFile</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RootShowUserFile</servlet-name>
+        <url-pattern>/RSUF</url-pattern>
+    </servlet-mapping>
 </web-app>
