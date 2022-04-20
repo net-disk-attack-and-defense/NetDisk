@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -53,8 +54,27 @@ public class RootDeleteUser extends HttpServlet {
                             ps.setString(1, del_email);
                             int delstate = ps.executeUpdate();
                             if (delstate == 1){
-                                System.out.println("删除成功");
-                                response.sendRedirect("RSU");
+                                String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
+                                File file0 = new File(realpath+"File/");
+                                file0.mkdir();
+                                File file1 = new File(realpath+"File/"+del_email+"/");
+                                if (file1.exists()) {
+                                    File[] files = file1.listFiles();
+                                    for (File file : files) {
+                                        file.delete();
+                                    }
+                                    file1.delete();
+                                    if (!file1.exists()) {
+                                        System.out.println("删除成功");
+                                        response.sendRedirect("RSU");
+                                    } else {
+                                        System.out.println("用户文件夹删除失败");
+                                        response.sendRedirect("RSU");
+                                    }
+                                } else {
+                                    System.out.println("删除成功");
+                                    response.sendRedirect("RSU");
+                                }
                             } else {
                                 System.out.println("删除失败");
                                 response.sendRedirect("RootDeleteFail.html");

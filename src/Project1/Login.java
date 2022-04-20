@@ -48,6 +48,7 @@ public class Login extends HttpServlet {
                     }
                     //管理员session有效时长设置为默认的关闭浏览器才销毁，不知是否安全
                     session.setAttribute("username", "ROOT");
+                    session.setAttribute("email", "ROOT@ROOT");
                     response.sendRedirect("RootPage.html"); //重定向至管理员页
                 } else {
                     if (check.check()) {
@@ -67,6 +68,7 @@ public class Login extends HttpServlet {
                             }
                             session.setMaxInactiveInterval(300);//session时长设置为5分钟
                             session.setAttribute("username", rs.getString("name"));
+                            session.setAttribute("email", email);
                             response.sendRedirect("SFP");
                             //request.getRequestDispatcher("SUI").forward(request,response);
                         } else response.sendRedirect("wrongpassword.html"); //重定向到密码错误页面，这个页面不归入ErrorPage1.html页面，防止为登录用户获得session

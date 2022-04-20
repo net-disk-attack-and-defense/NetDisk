@@ -34,13 +34,12 @@ public class RootShowUsers extends ViewBaseServlet{
                         while (rs.next()) {
                             i = i+1;
                         }
-                        String[][] users = new String[3][i];
+                        String[][] users = new String[2][i];
                         rs = ps.executeQuery();
                         i = 0;
                         while (rs.next()){
-                            users[0][i] = String.valueOf(i);
-                            users[1][i] = rs.getString("name");
-                            users[2][i] = rs.getString("email");
+                            users[0][i] = rs.getString("name");
+                            users[1][i] = rs.getString("email");
                             i = i+1;
                         }
                         session.setAttribute("users",users);

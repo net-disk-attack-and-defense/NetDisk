@@ -126,4 +126,13 @@
         <servlet-name>RootShowUserFile</servlet-name>
         <url-pattern>/RSUF</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RootFileUpload</servlet-name>
+        <servlet-class>Project1.RootFileUpload</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RootFileUpload</servlet-name>
+        <url-pattern>/RFU</url-pattern>
+    </servlet-mapping>
 </web-app>

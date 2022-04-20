@@ -32,10 +32,10 @@
                 <td>用户名</td>
                 <td>用户邮箱</td>
             </tr>
-            <tr th:each="f,t:${session.users[0]}" onmouseover="ShowBgColor()" onmouseout="ClearBgColor()" onclick="popout_RCU()">
+            <tr th:each="f,t:${session.users[1]}" onmouseover="ShowBgColor()" onmouseout="ClearBgColor()" onclick="popout_RCU()">
                 <td th:text="${t.count}">NULL</td>
-                <td th:text="${session.users[1][(t.count)-1]}" name = "name">NULL</td> <!--thymeleaf读取name-->
-                <td th:text="${session.users[2][(t.count)-1]}" name = "email">NULL</td> <!--thymeleaf读取email-->
+                <td th:text="${session.users[0][(t.count)-1]}" name = "name">NULL</td> <!--thymeleaf读取name-->
+                <td th:text="${session.users[1][(t.count)-1]}" name = "email">NULL</td> <!--thymeleaf读取email-->
             </tr>
         </table>
     </div>
@@ -61,7 +61,8 @@
         <div class="content">
             <h2>选择操作</h2>
             <form action="/NetDisk/RSUF" onsubmit="check()" method="post">
-                <button class="bt_RSF">查看文件</button>
+                <input type="hidden" id="bt_ShowFileName" name="bt_ShowFileName">
+                <button class="bt_RSF" id="bt_ShowFile" name="bt_ShowFile" onclick="submitid_File()">查看文件</button>
             </form>
             <form action="/NetDisk/RDU" onsubmit="check()" method="post">
                 <button class="bt_RDU" id="bt_del" name="bt_del" onclick="submitid()" value="">删除用户</button>

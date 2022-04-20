@@ -1,10 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>RootShowUserFile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/filepage.css">
+    <script src="js/RootShowUserFile.js"></script>
 </head>
 <body>
+<div class="container">
+    <p class="msg_username">当前查看的用户:</p>
+    <p th:text="${session.R_username}" class="msg_username">NULL</p>
 
+    <form action="/NetDisk/logout" method="get">
+        <button class="bt_logout">登出</button>
+    </form>
+    <button class="bt_delete">删除</button>
+    <button class="bt_upload" onclick="popoutToggle()">上传</button>
+    <button class="bt_download">下载</button>
+    <button class="bt_download">菜单</button>
+
+    <form action="" class="search-bar">
+        <input type="search" name="search" pattern=".*\S.*" placeholder="Search" required="required" onkeyup="this.value=this.value.replace(/[(/,<>: |'\\)]/g,'')">
+        <button class="search-btn" type="submit">
+            <span>Search</span>
+        </button>
+    </form>
+
+    <div class="wrapper">
+        <!--n+1行，3列（勾选列、序号列、文件名列（、文件大小列））-->
+        <!--是否需要实现分页功能-->
+        <table>
+            <tr>
+                <td width="40px">勾选</td>
+                <td width="40px">序号</td>
+                <td>文件名</td>
+            </tr>
+            <tr th:each="f,t:${session.R_allfiles}">
+                <td>
+                    <label> <!--尚未了解checkbox如何被后台读取-->
+                        <input class="checkbox" type="checkbox">
+                    </label>
+                </td>
+                <td th:text="${t.count}">NULL</td>
+                <td th:text="${f.getName()}">NULL</td> <!--thymeleaf读取-->
+            </tr>
+        </table>
+    </div>
+    <div id="popout_upload">
+        <div class="content">
+            <h2>Upload</h2>
+            <form action="/NetDisk/RFU" method="post" enctype="multipart/form-data">
+                <div class="inputbox">
+                    <input type="file" name="uploadfile" required="required">
+                </div>
+                <div class="inputbox">
+                    <input type="text" name="resetfilename" placeholder="输入文件名，需加上后缀（.xxx）" onkeyup="this.value=this.value.replace(/[(/,<>: |'\\)]/g,'')">
+                </div>
+                <button class="bt_inputbox">Upload</button>
+            </form>
+        </div>
+        <a href="RSUF" class="bt_close" onclick="popoutToggle()"><img src="image/close.png" width="45" height="45"></a>
+    </div>
+</div>
 </body>
 </html>
