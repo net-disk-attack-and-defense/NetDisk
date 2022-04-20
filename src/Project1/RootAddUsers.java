@@ -13,12 +13,11 @@ public class RootAddUsers extends HttpServlet {
         int SpiderState = 0;
         try {
             User_Agent_Check uAC = new User_Agent_Check(request.getHeader("user-agent"));
-            Referer_Check RC1 = new Referer_Check(request.getHeader("referer"), "NetDisk/RAU");
-            Referer_Check RC2 = new Referer_Check(request.getHeader("referer"), "NetDisk/RSU");
+            Referer_Check RC = new Referer_Check(request.getHeader("referer"), "NetDisk/RAU", "NetDisk/RSU");
             if (uAC.check()) {
                 response.sendRedirect("403.html");
                 SpiderState = 1;
-            } else if (!(!RC1.check() || !RC2.check())) {
+            } else if (RC.check()) {
                 response.sendRedirect("403.html");
                 SpiderState = 1;
             }

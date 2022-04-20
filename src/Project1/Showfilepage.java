@@ -16,11 +16,8 @@ public class Showfilepage extends ViewBaseServlet {
             if (!session.isNew()) {//判断session是否新的，但似乎无用
                 if (request.getHeader("referer")!=null){
                     System.out.println(request.getHeader("referer"));
-                    Referer_Check RC = new Referer_Check(request.getHeader("referer"), "NetDisk/login.html");
-                    Referer_Check RC1 = new Referer_Check(request.getHeader("referer"), "NetDisk/filepage.html");
-                    Referer_Check RC2 = new Referer_Check(request.getHeader("referer"), "NetDisk/SFP");//TODO 此处函数有待优化
-                    Referer_Check RC3 = new Referer_Check(request.getHeader("referer"), "NetDisk/ShowError");
-                    if ((!RC.check() || !RC1.check() || !RC2.check() || !RC3.check()) && session.getAttribute("username") != null) {  //验证来源链接
+                    Referer_Check RC = new Referer_Check(request.getHeader("referer"), "NetDisk/ShowError","NetDisk/SFP","NetDisk/filepage.html","NetDisk/login.html");
+                    if (!RC.check() && session.getAttribute("username") != null) {  //验证来源链接
                         String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
                         File file0 = new File(realpath+"File/");
                         file0.mkdir();

@@ -432,3 +432,132 @@ body {
     right: 10px;
     cursor: pointer;
 }
+
+/* 点击用户弹框 */
+#popout_user {
+    position: fixed;
+    top: -100%; /* -100% */
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1000;
+    background: white;
+    width: 450px;
+    padding: 20px 50px 50px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    transition: 0.5s;
+    visibility: hidden;
+    border-radius: 15px;
+}
+
+#popout_user.active {
+    visibility: visible;
+    top: 50%;
+}
+
+#popout_user .content {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+#popout_user .content h2 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 800;
+    color: #0d0d0d;
+    margin: 20px 0 20px 0;
+}
+
+#popout_user .content .inputbox {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+/* 展示文件按钮 */
+#popout_user .content .bt_RSF {
+    font-family: \u5E7C\u5706, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0);
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 150px;
+    height: 45px;
+    text-align: center;
+    line-height: 40px;
+    color: #000;
+    background-color: rgba(172, 229, 209, 0.78);
+    text-transform: uppercase;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+#popout_user .content .bt_RSF:hover{
+    background-color: #2EE59D;
+    box-shadow: 0 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translate(-50%, -14%);
+}
+
+#popout_user .content .bt_RSF:active{
+    transform: translate(-50%, -2%);
+}
+
+/* 删除用户按钮 */
+#popout_user .content .bt_RDU {
+    font-family: \u5E7C\u5706, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0);
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 150px;
+    height: 45px;
+    text-align: center;
+    line-height: 40px;
+    color: #000;
+    background-color: rgba(229, 172, 172, 0.78);
+    text-transform: uppercase;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+#popout_user .content .bt_RDU:hover{
+    background-color: #e52e2e;
+    box-shadow: 0 15px 20px rgba(229, 46, 46, 0.4);
+    color: #fff;
+    transform: translate(-50%, -14%);
+}
+
+#popout_user .content .bt_RDU:active{
+    transform: translate(-50%, -2%);
+}
+
+#popout_user .bt_close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
