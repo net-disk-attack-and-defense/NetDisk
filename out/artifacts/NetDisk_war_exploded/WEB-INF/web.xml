@@ -144,4 +144,22 @@
         <servlet-name>RootFileUpload</servlet-name>
         <url-pattern>/RFU</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RootFileDelete</servlet-name>
+        <servlet-class>Project1.RootFileDelete</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RootFileDelete</servlet-name>
+        <url-pattern>/RFD</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RootFileDownload</servlet-name>
+        <servlet-class>Project1.RootFileDownload</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RootFileDownload</servlet-name>
+        <url-pattern>/RFDown</url-pattern>
+    </servlet-mapping>
 </web-app>

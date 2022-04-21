@@ -59,10 +59,8 @@ public class RootFileUpload extends HttpServlet {
                             }
                         }
                     }
-                }
-                else {
-                    session.setAttribute("Error","文件夹创建失败");
-                    //session.setAttribute("Errormsg","");
+                } else {
+                    session.setAttribute("Error","用户文件夹创建失败");
                     response.sendRedirect("ShowError");
                 }
             } else response.sendRedirect("403.html");
