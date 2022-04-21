@@ -3,8 +3,8 @@ function popoutToggle() {
     popout.classList.toggle('active')
 }
 
-function submit_del() {
-    document.getElementById("f_file").submit();
+function submit() {
+    document.getElementById("DoOrDe").submit();
 }
 
 function changeAction(x) {

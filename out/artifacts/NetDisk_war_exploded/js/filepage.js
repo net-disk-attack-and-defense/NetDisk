@@ -3,6 +3,14 @@ function popoutToggle() {
     popout.classList.toggle('active')
 }
 
-function submit_del() {
-    document.getElementById("f_file").submit();
+function submit() {
+    document.getElementById("DoOrDe").submit();
+}
+
+function changeAction(x) {
+    if (x.getAttribute("class") === "bt_download"){
+        document.getElementById("DoOrDe").getAttributeNode("action").value="FileDownload";
+    }else {
+        document.getElementById("DoOrDe").getAttributeNode("action").value="FileDelete";
+    }
 }
