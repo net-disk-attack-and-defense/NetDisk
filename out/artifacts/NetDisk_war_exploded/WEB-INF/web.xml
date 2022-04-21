@@ -74,6 +74,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>FileDelete</servlet-name>
+        <servlet-class>Project1.FileDelete</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FileDelete</servlet-name>
+        <url-pattern>/FileDelete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ShowError</servlet-name>
         <servlet-class>Project1.ShowError</servlet-class>
     </servlet>

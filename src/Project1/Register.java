@@ -32,7 +32,7 @@ public class Register extends HttpServlet {
             if (username.length() > 20 || username.length() <= 2 || password.length() < 6 || password.length() > 32 || email.length() > 32) {
                 response.sendRedirect("register.html");
             } else {
-                if (username == "ROOT" || email == "ROOT@ROOT"){ //不允许注册管理员账户
+                if (username.equals("ROOT") || email.equals("ROOT@ROOT")){ //不允许注册管理员账户
                     response.sendRedirect("register.html");
                 }else {
                     int register_state;
