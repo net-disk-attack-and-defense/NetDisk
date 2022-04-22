@@ -14,7 +14,7 @@ public class FileDelete extends HttpServlet {
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        if (session!=null){
+        if (session!=null && request.getHeader("referer")!=null && request.getHeader("user-agent")!=null){
             System.out.println("FD:"+request.getHeader("referer"));
             User_Agent_Check uAC = new User_Agent_Check(request.getHeader("user-agent"));
             Referer_Check RC = new Referer_Check(request.getHeader("referer"), "/NetDisk/filepage.html","/NetDisk/SFP","/NetDisk/RSUF");

@@ -21,23 +21,25 @@ public class Login extends HttpServlet {
             if (uAC.check()) {
                 response.sendRedirect("403.html");//user_agent
                 SpiderState = 1;
+                System.out.println("User Agent测试不通过");
             } else if (RC.check()) {
                 response.sendRedirect("403.html");//referer
                 SpiderState = 1;
+                System.out.println("Referer测试不通过");
             }
         } catch (NullPointerException e) {
             response.sendRedirect("403.html");
             SpiderState = 1;
         }
-        if (SpiderState==0) {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            //TODO 没有验证账户密码长度，尚不知有无问题
+        if (SpiderState==0 && request.getParameter("password")!=null && request.getParameter("email")!=null) {
             Connection conn = null;
             PreparedStatement ps = null;
             ResultSet rs = null;
             try {
-                String path = this.getServletContext().getRealPath("/WEB-INF/classes/DB_Info.properties");
+                String email = request.getParameter("email");
+                String password = request.getParameter("password");
+                //TODO 没有验证账户密码长度，尚不知有无问题
+                String path = this.getServletContext().getRealPath("/WEB-INF/classes/DB_Info.properties");//无用
                 Email_Check check = new Email_Check(email, path);
                 if (email.equals("ROOT@ROOT") && password.equals("QxbS2*F4y15J78=TrsB!3mY0-+nv.uZD")) { //如果是管理员用户登录,管理员密码暂且写死为一个强密码
                     //给予session
@@ -99,6 +101,6 @@ public class Login extends HttpServlet {
                     e.printStackTrace();
                 }
             }
-        }
+        } else response.sendError(403);
     }
 }

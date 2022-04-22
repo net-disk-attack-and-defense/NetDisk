@@ -25,7 +25,7 @@ public class Register extends HttpServlet {
             response.sendRedirect("403.html");
             SpiderState = 1;
         }
-        if (SpiderState==0){
+        if (SpiderState==0 && request.getParameter("username")!=null && request.getParameter("password")!=null && request.getParameter("email")!=null){
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
@@ -52,7 +52,7 @@ public class Register extends HttpServlet {
                     }
                 }
             }
-        }
+        } else response.sendError(403);
     }
 }
 
