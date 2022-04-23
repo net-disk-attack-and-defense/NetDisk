@@ -13,7 +13,7 @@
         <div class="header" th:text="${session.Error}">Error</div>
         <div class="msg" th:text="${session.Errormsg}">detailed information</div>
         <div class="form-wrapper">
-            <a href="SFP"><button class="btng">Back to filepage</button></a>
+            <a th:href="@{${session.Redirect}}"><button class="btng">Back to filepage</button></a>
         </div>
     </div>
 </div>

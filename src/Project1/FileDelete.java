@@ -32,12 +32,14 @@ public class FileDelete extends HttpServlet {
                             File file2 = new File(realpath+"File/"+session.getAttribute("email")+"/"+filename);
                             if (file2.exists()) { //如果欲删除的文件存在
                                 if (!file2.delete()) { //如果文件未删除成功
+                                    session.setAttribute("Redirect","SFP");
                                     session.setAttribute("Error","文件删除失败");
                                     response.sendRedirect("ShowError");
                                 }
                             }
                         }
                     } else {
+                        session.setAttribute("Redirect","SFP");
                         session.setAttribute("Error","用户文件夹不存在");
                         response.sendRedirect("ShowError");
                     }

@@ -28,6 +28,7 @@ public class FileUpload extends HttpServlet {
                     if (resetfilename.length()!=0){
                         File file2 = new File(realpath+"File/"+session.getAttribute("email")+"/"+resetfilename);
                         if (file2.exists()){ //判断上传的文件是否已存在
+                            session.setAttribute("Redirect","SFP");
                             session.setAttribute("Error","已存在同名文件");
                             session.setAttribute("Errormsg","如果需要替换文件请先删除原同名文件后再进行提交");
                             response.sendRedirect("ShowError");
@@ -37,6 +38,7 @@ public class FileUpload extends HttpServlet {
                             File file3 = new File(realpath+"File/"+session.getAttribute("email")+"/"+resetfilename);
                             if(file3.exists()) response.sendRedirect("SFP");
                             else {
+                                session.setAttribute("Redirect","SFP");
                                 session.setAttribute("Error","文件上传失败");
                                 response.sendRedirect("ShowError");
                             }
@@ -47,6 +49,7 @@ public class FileUpload extends HttpServlet {
                         System.out.println("file2"+file2);
                         System.out.println("exist:"+file2.exists());
                         if (file2.exists()){ //判断上传的文件是否已存在
+                            session.setAttribute("Redirect","SFP");
                             session.setAttribute("Error","已存在同名文件");
                             session.setAttribute("Errormsg","如果需要替换文件请先删除原同名文件后再进行提交");
                             response.sendRedirect("ShowError");
@@ -54,6 +57,7 @@ public class FileUpload extends HttpServlet {
                             part.write(realpath+"File/"+session.getAttribute("email")+"/"+realfilename);
                             if(file2.exists()) response.sendRedirect("SFP");
                             else {
+                                session.setAttribute("Redirect","SFP");
                                 session.setAttribute("Error","文件上传失败");
                                 response.sendRedirect("ShowError");
                             }
@@ -61,6 +65,7 @@ public class FileUpload extends HttpServlet {
                     }
                 }
                 else {
+                    session.setAttribute("Redirect","SFP");
                     session.setAttribute("Error","文件夹创建失败");
                     //session.setAttribute("Errormsg","");
                     response.sendRedirect("ShowError");

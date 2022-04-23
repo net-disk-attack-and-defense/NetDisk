@@ -31,12 +31,14 @@ public class RootFileDelete extends HttpServlet {
                                 File file2 = new File(realpath+"File/"+session.getAttribute("R_email")+"/"+filename);//每个欲删除的用户文件的地址
                                 if (file2.exists()) { //如果欲删除的文件存在
                                     if (!file2.delete()) { //如果文件未删除成功
+                                        session.setAttribute("Redirect","RSU");
                                         session.setAttribute("Error","文件删除失败");
                                         response.sendRedirect("ShowError");
                                     }
                                 }
                             }
                         }else {
+                            session.setAttribute("Redirect","RSU");
                             session.setAttribute("Error","用户文件夹不存在");
                             response.sendRedirect("ShowError");
                         }
