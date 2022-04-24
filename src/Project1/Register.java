@@ -35,20 +35,24 @@ public class Register extends HttpServlet {
                 if (username.equals("ROOT") || email.equals("ROOT@ROOT")){ //不允许注册管理员账户
                     response.sendRedirect("register.html");
                 }else {
-                    int register_state;
-                    try {
-                        String path = this.getServletContext().getRealPath("/WEB-INF/classes/DB_Info.properties");
-                        DB_Write try01 = new DB_Write(username, password, email, path);
-                        register_state = try01.write();
-                        switch (register_state) {
-                            case 0 -> response.sendRedirect("ServerError.html");//这几个页面不归入ErrorPage1.html页面，防止为登录用户获得session
-                            case 1 -> response.sendRedirect("EmailExist.html");
-                            case 2 -> response.sendRedirect("SignUpSuccess.html");
-                            case 3 -> response.sendRedirect("SignUpFail.html");
+                    if (SpecialCharCheck.check(username) || SpecialCharCheck.check(password) || SpecialCharCheck.check(email)){
+                        response.sendError(403);
+                    }else {
+                        int register_state;
+                        try {
+                            String path = this.getServletContext().getRealPath("/WEB-INF/classes/DB_Info.properties");//无用
+                            DB_Write try01 = new DB_Write(username, password, email, path);
+                            register_state = try01.write();
+                            switch (register_state) {
+                                case 0 -> response.sendRedirect("ServerError.html");//这几个页面不归入ErrorPage1.html页面，防止为登录用户获得session
+                                case 1 -> response.sendRedirect("EmailExist.html");
+                                case 2 -> response.sendRedirect("SignUpSuccess.html");
+                                case 3 -> response.sendRedirect("SignUpFail.html");
+                            }
+                        } catch (Exception e) {
+                            PrintWriter out = response.getWriter();
+                            out.print("<br><h1 style=\"text-align:center;font-size:2.5em;\">配置文件出错，请检查配置文件</h1>");
                         }
-                    } catch (Exception e) {
-                        PrintWriter out = response.getWriter();
-                        out.print("<br><h1 style=\"text-align:center;font-size:2.5em;\">配置文件出错，请检查配置文件</h1>");
                     }
                 }
             }

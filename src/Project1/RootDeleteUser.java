@@ -36,75 +36,80 @@ public class RootDeleteUser extends HttpServlet {
             if (session != null) {
                 if (session.getAttribute("username")!=null) {
                     if (session.getAttribute("username").equals("ROOT") && request.getParameter("bt_del")!=null) {
-                        System.out.println("要删除的用户邮箱："+request.getParameter("bt_del"));
-                        String del_email = request.getParameter("bt_del");
-                        Connection conn = null;
-                        PreparedStatement ps = null;
-                        ResultSet rs = null;
-                        String path = this.getServletContext().getRealPath("/WEB-INF/classes/DB_Info.properties");
-                        DB_Connect connect = new DB_Connect();
-                        try {
-                            conn = connect.connect(path);
-                            String sql1 = "select*from mypan.users where email=?;";
-                            ps = conn.prepareStatement(sql1);
-                            ps.setString(1, del_email);
-                            rs = ps.executeQuery();
-                            if(rs.next()){
-                                String sql2 = "DELETE FROM mypan.users WHERE email=?;";
-                                ps = conn.prepareStatement(sql2);
+                        if (!SpecialCharCheck.check(request.getParameter("bt_del"))){
+                            System.out.println("要删除的用户邮箱："+request.getParameter("bt_del"));
+                            String del_email = request.getParameter("bt_del");
+                            Connection conn = null;
+                            PreparedStatement ps = null;
+                            ResultSet rs = null;
+                            String path = this.getServletContext().getRealPath("/WEB-INF/classes/DB_Info.properties");
+                            DB_Connect connect = new DB_Connect();
+                            try {
+                                conn = connect.connect(path);
+                                String sql1 = "select*from mypan.users where email=?;";
+                                ps = conn.prepareStatement(sql1);
                                 ps.setString(1, del_email);
-                                int delstate = ps.executeUpdate();
-                                if (delstate == 1){
-                                    String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
-                                    File file0 = new File(realpath+"File/");
-                                    file0.mkdir();
-                                    File file1 = new File(realpath+"File/"+del_email+"/");
-                                    if (file1.exists()) {
-                                        File[] files = file1.listFiles();
-                                        for (File file : files) {
-                                            file.delete();
-                                        }
-                                        file1.delete();
-                                        if (!file1.exists()) {
-                                            System.out.println("删除成功");
-                                            response.sendRedirect("RSU");
+                                rs = ps.executeQuery();
+                                if(rs.next()){
+                                    String sql2 = "DELETE FROM mypan.users WHERE email=?;";
+                                    ps = conn.prepareStatement(sql2);
+                                    ps.setString(1, del_email);
+                                    int delstate = ps.executeUpdate();
+                                    if (delstate == 1){
+                                        String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
+                                        File file0 = new File(realpath+"File/");
+                                        file0.mkdir();
+                                        File file1 = new File(realpath+"File/"+del_email+"/");
+                                        if (file1.exists()) {
+                                            File[] files = file1.listFiles();
+                                            for (File file : files) {
+                                                file.delete();
+                                            }
+                                            file1.delete();
+                                            if (!file1.exists()) {
+                                                System.out.println("删除成功");
+                                                response.sendRedirect("RSU");
+                                            } else {
+                                                System.out.println("用户文件夹删除失败");
+                                                response.sendRedirect("RSU");
+                                            }
                                         } else {
-                                            System.out.println("用户文件夹删除失败");
+                                            System.out.println("删除成功");
                                             response.sendRedirect("RSU");
                                         }
                                     } else {
-                                        System.out.println("删除成功");
-                                        response.sendRedirect("RSU");
+                                        System.out.println("删除失败");
+                                        response.sendRedirect("RootDeleteFail.html");
                                     }
-                                } else {
-                                    System.out.println("删除失败");
-                                    response.sendRedirect("RootDeleteFail.html");
                                 }
-                            }
-                        } catch (SQLException | ClassNotFoundException e) {
-                            e.printStackTrace();
-                        } finally {
-                            try {
-                                if (ps !=null){
-                                    ps.close();
-                                }
-                            }catch (SQLException e){
+                            } catch (SQLException | ClassNotFoundException e) {
                                 e.printStackTrace();
-                            }
-                            try {
-                                if (rs !=null){
-                                    rs.close();
+                            } finally {
+                                try {
+                                    if (ps !=null){
+                                        ps.close();
+                                    }
+                                }catch (SQLException e){
+                                    e.printStackTrace();
                                 }
-                            }catch (SQLException e){
-                                e.printStackTrace();
-                            }
-                            try {
-                                if (conn !=null){
-                                    conn.close();
+                                try {
+                                    if (rs !=null){
+                                        rs.close();
+                                    }
+                                }catch (SQLException e){
+                                    e.printStackTrace();
                                 }
-                            }catch (SQLException e){
-                                e.printStackTrace();
+                                try {
+                                    if (conn !=null){
+                                        conn.close();
+                                    }
+                                }catch (SQLException e){
+                                    e.printStackTrace();
+                                }
                             }
+                        }else {
+                            session.invalidate();
+                            response.sendError(403);
                         }
                     } else response.sendError(403);
                 } else response.sendError(403);

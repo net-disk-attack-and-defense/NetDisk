@@ -15,7 +15,7 @@ public class FileUpload extends HttpServlet {
             User_Agent_Check uAC = new User_Agent_Check(request.getHeader("user-agent"));
             Referer_Check RC = new Referer_Check(request.getHeader("referer"), "/NetDisk/filepage.html","/NetDisk/SFP","/NetDisk/RSUF");
             System.out.println("FU:"+request.getHeader("referer"));
-            if (session.getAttribute("email")!=null && !uAC.check() && !RC.check()){
+            if (session.getAttribute("email")!=null && !uAC.check() && !RC.check() && !SpecialCharCheck.check((String) session.getAttribute("email"))){
                 String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
                 File file0 = new File(realpath+"File/");
                 file0.mkdir();

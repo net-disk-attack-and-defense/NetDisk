@@ -23,7 +23,7 @@ public class FileDownload extends HttpServlet {
             if (session.getAttribute("email") != null && !uAC.check() && !RC.check()) {
                 String[] filenames = request.getParameterValues("filename");
                 if (filenames!=null){
-                    if (filenames.length==1) {
+                    if (filenames.length==1 && !SpecialCharCheck.check((String) session.getAttribute("email"))) {
                         String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
                         File file0 = new File(realpath + "File/");
                         file0.mkdir();

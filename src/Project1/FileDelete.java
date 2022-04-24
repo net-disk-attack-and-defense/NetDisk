@@ -20,7 +20,7 @@ public class FileDelete extends HttpServlet {
             Referer_Check RC = new Referer_Check(request.getHeader("referer"), "/NetDisk/filepage.html","/NetDisk/SFP","/NetDisk/RSUF");
             if (session.getAttribute("email")!=null && !uAC.check() && !RC.check()){
                 String[] filenames = request.getParameterValues("filename");
-                if (filenames != null){
+                if (filenames != null && !SpecialCharCheck.check((String) session.getAttribute("email"))){
                     String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
                     File file0 = new File(realpath+"File/");
                     file0.mkdir();

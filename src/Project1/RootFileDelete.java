@@ -27,7 +27,7 @@ public class RootFileDelete extends HttpServlet {
                         file1.mkdir(); //创建用户文件夹
                         if (file1.exists()) { //如果用户文件夹存在
                             for (String filename : filenames){
-                                System.out.println("Rdel_file:"+filename);
+                                System.out.println("管理员删除文件:"+filename);
                                 File file2 = new File(realpath+"File/"+session.getAttribute("R_email")+"/"+filename);//每个欲删除的用户文件的地址
                                 if (file2.exists()) { //如果欲删除的文件存在
                                     if (!file2.delete()) { //如果文件未删除成功
