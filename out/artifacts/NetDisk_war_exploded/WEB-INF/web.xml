@@ -101,15 +101,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>RootPage</servlet-name>
-        <servlet-class>Project1.RootPage</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>RootPage</servlet-name>
-        <url-pattern>/RootPage</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>RootShowUsers</servlet-name>
         <servlet-class>Project1.RootShowUsers</servlet-class>
     </servlet>

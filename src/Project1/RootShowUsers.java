@@ -16,9 +16,11 @@ public class RootShowUsers extends ViewBaseServlet{
         //TODO 限制用户操作频率和最大操作数
         HttpSession session = request.getSession(false);//不创建新ID
         if (session != null) { //判断session是否存在
-            if (!session.isNew() && request.getHeader("referer")!=null && session.getAttribute("username") != null) {//判断session是否新的，但似乎无用
+            if (!session.isNew() && request.getHeader("referer")!=null && session.getAttribute("username") != null && session.getAttribute("email") != null) {//判断session是否新的，但似乎无用
+                System.out.println("RSU:"+request.getHeader("referer"));
                 Referer_Check RC = new Referer_Check(request.getHeader("referer"), "NetDisk/RootSignUpFail.html","NetDisk/RootSignUpSuccess.html","NetDisk/RootEmailExist.html","NetDisk/ShowError","NetDisk/RSU","NetDisk/RootPage.html","NetDisk/RootShowUsers.html","NetDisk/RFD","NetDisk/RFU","NstDisk/RootShowUserFile.html");
-                if (!RC.check() && session.getAttribute("username").equals("ROOT")) {  //验证来源链接
+                //检查来源链接以及校验是否管理员账号密码
+                if (!RC.check() && session.getAttribute("username").equals("ROOT") && session.getAttribute("email").equals("ROOT@ROOT")) {  //验证来源链接
                     Connection conn = null;
                     PreparedStatement ps = null;
                     ResultSet rs = null;
@@ -41,6 +43,7 @@ public class RootShowUsers extends ViewBaseServlet{
                             users[1][i] = rs.getString("email");
                             i = i+1;
                         }
+                        //将查询得的用户信息存入session
                         session.setAttribute("users",users);
                         session.setAttribute("usersnum",i);
                     } catch (SQLException | ClassNotFoundException e) {
@@ -69,8 +72,8 @@ public class RootShowUsers extends ViewBaseServlet{
                         }
                     }
                     super.processTemplate("RootShowUsers", request, response);
-                } else response.sendRedirect("403.html");
-            } else response.sendRedirect("403.html");
+                } else response.sendError(403);
+            } else response.sendError(403);
         } else response.sendRedirect("login.html");//如果session过期
     }
 }
