@@ -1,6 +1,5 @@
 package Project1;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +9,7 @@ import java.io.IOException;
 
 public class RootFileDelete extends HttpServlet {
     @Override
-    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(false);
         if (session!=null &&request.getHeader("user-agent")!=null &&request.getHeader("referer")!=null){
             User_Agent_Check uAC = new User_Agent_Check(request.getHeader("user-agent"));
