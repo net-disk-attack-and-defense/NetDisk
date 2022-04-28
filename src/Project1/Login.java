@@ -5,10 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -37,6 +34,7 @@ public class Login extends HttpServlet {
             Connection conn = null;
             PreparedStatement ps = null;
             ResultSet rs = null;
+            Statement stmt =null;
             try {
                 String email = request.getParameter("email");
                 String password = request.getParameter("password");
@@ -71,11 +69,9 @@ public class Login extends HttpServlet {
                         ps.setString(1, remoteIP);
                         rs = ps.executeQuery();
                         if (rs.next()){ //如果确实有ip被封的记录,则比对被封时间
-                            System.out.println("存在ip被封的记录");
                             if (!(rs.getString("YMD")).equals(sdf.format(System.currentTimeMillis()))) {
                                 // 如果ip被封的与当前不是同一天，那么放行，但是不删除ip记录
                                 permit = 1;
-                                System.out.println("不是同一天");
                             } else {
                                 // 如果ip被封时间是今天，那么继续比较小时与分钟
                                 int forbidden_hour = Integer.parseInt(rs.getString("hour"));//获取ip被封时间
@@ -83,19 +79,16 @@ public class Login extends HttpServlet {
                                 int delta_minute = (hour - forbidden_hour)*60 + (minute - forbidden_minute);
                                 if (delta_minute>5) {
                                     permit = 1; //如果已经被封禁了超过五分钟，那么放行，但是不删除ip
-                                    System.out.println("时间已经超过五分钟");
                                 }
                             }
                         } else permit = 1; //如果没有ip被封的记录，则放行
                         if (permit == 1){
                             //正常放行
-                            String sql = "select*from mypan.users where email=? and passwd=?";//?是占位符
-                            ps = conn.prepareStatement(sql);
-                            //给占位符？传值，第一个问号下标是1，jdbc的下标从1开始
-                            ps.setString(1, email);
-                            ps.setString(2, password);
-                            rs = ps.executeQuery();
+                            String sql = "select*from mypan.users where email='"+email+"' and passwd='"+password+"'";//?是占位符
+                            stmt = conn.createStatement();
+                            rs = stmt.executeQuery(sql);
                             if (rs.next()) {
+                                //如果用户登录成功
                                 HttpSession session = request.getSession();
                                 if (!session.isNew()) {  //如果session不是新的，那么失效上一个session并再次创建
                                     session.invalidate();//TODO 此方法只是删除ID属性值，未真正删除ID，尚不知会不会有问题
@@ -106,6 +99,7 @@ public class Login extends HttpServlet {
                                 session.setAttribute("email", email);
                                 response.sendRedirect("SFP");
                             } else {
+                                //如果用户登录失败
                                 System.out.println("用户IP地址: " + remoteIP);
                                 String sql1 = "select*from mypan.passwd_wrong where ip=?";
                                 ps = conn.prepareStatement(sql1);
