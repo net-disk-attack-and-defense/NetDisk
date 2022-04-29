@@ -71,11 +71,9 @@ public class Login extends HttpServlet {
                         ps.setString(1, remoteIP);
                         rs = ps.executeQuery();
                         if (rs.next()){ //如果确实有ip被封的记录,则比对被封时间
-                            System.out.println("存在ip被封的记录");
                             if (!(rs.getString("YMD")).equals(sdf.format(System.currentTimeMillis()))) {
                                 // 如果ip被封的与当前不是同一天，那么放行，但是不删除ip记录
                                 permit = 1;
-                                System.out.println("不是同一天");
                             } else {
                                 // 如果ip被封时间是今天，那么继续比较小时与分钟
                                 int forbidden_hour = Integer.parseInt(rs.getString("hour"));//获取ip被封时间

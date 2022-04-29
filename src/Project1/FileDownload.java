@@ -31,6 +31,8 @@ public class FileDownload extends HttpServlet {
                         file1.mkdir(); //创建用户文件夹
                         if (file1.exists()) {
                             for (String filename : filenames) {  //实际只有一个文件
+                                filename = filename.replace("\\","");
+                                filename = filename.replace("/","");
                                 System.out.println("下载的文件:" + filename);
                                 File file2 = new File(realpath + "File/" + session.getAttribute("email") + "/" + filename);
                                 if (file2.exists() && file2.isFile()) { //如果欲下载的文件存在
