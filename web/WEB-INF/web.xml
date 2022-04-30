@@ -115,6 +115,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>logs</servlet-name>
+        <servlet-class>Project1.logs</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logs</servlet-name>
+        <url-pattern>/logs</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>RootAddUsers</servlet-name>
         <servlet-class>Project1.RootAddUsers</servlet-class>
     </servlet>
