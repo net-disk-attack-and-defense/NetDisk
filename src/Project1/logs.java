@@ -31,7 +31,7 @@ public class logs extends ViewBaseServlet {
                     File file = new File(path);
                     //获取tomcat目录中的日志文件
                     System.out.println("path:"+file.getPath());
-                    while (!file.getName().equals("Tomcat")){
+                    while (!file.getName().equals("Tomcat8")){
                         file=file.getParentFile();
                     }
                     SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
