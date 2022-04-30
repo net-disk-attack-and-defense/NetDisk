@@ -36,7 +36,7 @@ public class logs extends ViewBaseServlet {
                     }
                     SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd");
 
-                    file=new File(file.getPath()+"/logs/localhost_access_log."+sdf.format(System.currentTimeMillis())+".txt");
+                    file=new File(file.getPath()+"/logs/netDisk_log."+sdf.format(System.currentTimeMillis())+".txt");
 
                         System.out.println(file.getPath());
                         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
