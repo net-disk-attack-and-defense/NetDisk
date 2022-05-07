@@ -19,15 +19,15 @@ public class RootFileDelete extends HttpServlet {
                 if (session.getAttribute("email").equals("ROOT@ROOT") && !uAC.check() && !RC.check() && session.getAttribute("R_email") != null){
                     String[] filenames = request.getParameterValues("filename");
                     if (filenames != null){ //如果要删除的文件不为空
-                        String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
-                        File file0 = new File(realpath+"File/");
+                        String realpath = request.getServletContext().getRealPath("/");//获取项目真实地址
+                        File file0 = new File(realpath+"upload/");
                         file0.mkdir();
-                        File file1 = new File(realpath+"File/"+session.getAttribute("R_email")+"/");
+                        File file1 = new File(realpath+"upload/"+session.getAttribute("R_email")+"/");
                         file1.mkdir(); //创建用户文件夹
                         if (file1.exists()) { //如果用户文件夹存在
                             for (String filename : filenames){
                                 System.out.println("管理员删除文件:"+filename);
-                                File file2 = new File(realpath+"File/"+session.getAttribute("R_email")+"/"+filename);//每个欲删除的用户文件的地址
+                                File file2 = new File(realpath+"upload/"+session.getAttribute("R_email")+"/"+filename);//每个欲删除的用户文件的地址
                                 if (file2.exists()) { //如果欲删除的文件存在
                                     if (!file2.delete()) { //如果文件未删除成功
                                         session.setAttribute("Redirect","RSU");

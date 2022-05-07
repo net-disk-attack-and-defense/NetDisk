@@ -16,10 +16,10 @@ public class FileUpload extends HttpServlet {
             Referer_Check RC = new Referer_Check(request.getHeader("referer"), "/NetDisk/filepage.html","/NetDisk/SFP","/NetDisk/RSUF");
             System.out.println("FU:"+request.getHeader("referer"));
             if (session.getAttribute("email")!=null && !uAC.check() && !RC.check() && !SpecialCharCheck.check((String) session.getAttribute("email"))){
-                String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
-                File file0 = new File(realpath+"File/");
+                String realpath = request.getServletContext().getRealPath("/");//获取项目真实地址
+                File file0 = new File(realpath+"upload/");
                 file0.mkdir();
-                File file1 = new File(realpath+"File/"+session.getAttribute("email")+"/");
+                File file1 = new File(realpath+"upload/"+session.getAttribute("email")+"/");
                 file1.mkdir();
                 if (file1.exists()){
                     String resetfilename =request.getParameter("resetfilename");//用户输入的文件名
@@ -27,52 +27,41 @@ public class FileUpload extends HttpServlet {
                     String realfilename =  part.getSubmittedFileName();//文件真实的名字
                     if (part.getSize()<=10485760){
                         if (resetfilename.length()!=0){  //如果用户填写了文件名
-                            File file2 = new File(realpath+"File/"+session.getAttribute("email")+"/"+resetfilename);
+                            File file2 = new File(realpath+"upload/"+session.getAttribute("email")+"/"+resetfilename);
                             if (file2.exists()){ //判断上传的文件是否已存在
                                 session.setAttribute("Redirect","SFP");
                                 session.setAttribute("Error","已存在同名文件");
                                 session.setAttribute("Errormsg","如果需要替换文件请先删除原同名文件后再进行提交");
                                 response.sendRedirect("ShowError");
                             }else{
-                                if (GetSuffix.suffix(resetfilename).equals("jsp")) {
-                                    session.setAttribute("Redirect","SFP");
-                                    session.setAttribute("Error","禁止上传jsp文件");
-                                    response.sendRedirect("ShowError");
+                                System.out.println("suffix:"+GetSuffix.suffix(realfilename));
+                                if (!resetfilename.contains(".")) {
+
+                                    resetfilename = resetfilename + "." +GetSuffix.suffix(realfilename);
+                                    part.write(realpath + "upload/" + session.getAttribute("email") + "/" + resetfilename);
+                                    //上传完后验证是否上传成功
+                                    File file3 = new File(realpath + "upload/" + session.getAttribute("email") + "/" + resetfilename);
+                                    if (file3.exists()) response.sendRedirect("SFP");
+                                    else {
+                                        session.setAttribute("Redirect", "SFP");
+                                        session.setAttribute("Error", "文件上传失败");
+                                        response.sendRedirect("ShowError");
+                                    }
                                 } else {
-                                    System.out.println("suffix:"+GetSuffix.suffix(realfilename));
-                                    if (!resetfilename.contains(".")) {
-                                        if (GetSuffix.suffix(realfilename).equals("jsp")){
-                                            session.setAttribute("Redirect","SFP");
-                                            session.setAttribute("Error","禁止上传jsp文件");
-                                            response.sendRedirect("ShowError");
-                                        } else {
-                                            resetfilename = resetfilename + "." +GetSuffix.suffix(realfilename);
-                                            part.write(realpath + "File/" + session.getAttribute("email") + "/" + resetfilename);
-                                            //上传完后验证是否上传成功
-                                            File file3 = new File(realpath + "File/" + session.getAttribute("email") + "/" + resetfilename);
-                                            if (file3.exists()) response.sendRedirect("SFP");
-                                            else {
-                                                session.setAttribute("Redirect", "SFP");
-                                                session.setAttribute("Error", "文件上传失败");
-                                                response.sendRedirect("ShowError");
-                                            }
-                                        }
-                                    } else {
-                                        part.write(realpath + "File/" + session.getAttribute("email") + "/" + resetfilename);
-                                        //上传完后验证是否上传成功
-                                        File file3 = new File(realpath + "File/" + session.getAttribute("email") + "/" + resetfilename);
-                                        if (file3.exists()) response.sendRedirect("SFP");
-                                        else {
-                                            session.setAttribute("Redirect", "SFP");
-                                            session.setAttribute("Error", "文件上传失败");
-                                            response.sendRedirect("ShowError");
-                                        }
+                                    part.write(realpath + "upload/" + session.getAttribute("email") + "/" + resetfilename);
+                                    //上传完后验证是否上传成功
+                                    File file3 = new File(realpath + "upload/" + session.getAttribute("email") + "/" + resetfilename);
+                                    if (file3.exists()) response.sendRedirect("SFP");
+                                    else {
+                                        session.setAttribute("Redirect", "SFP");
+                                        session.setAttribute("Error", "文件上传失败");
+                                        response.sendRedirect("ShowError");
                                     }
                                 }
                             }
 
                         } else {
-                            File file2 = new File(realpath+"File/"+session.getAttribute("email")+"/"+realfilename);
+                            File file2 = new File(realpath+"upload/"+session.getAttribute("email")+"/"+realfilename);
                             System.out.println("file2"+file2);
                             System.out.println("exist:"+file2.exists());
                             if (file2.exists()){ //判断上传的文件是否已存在
@@ -81,18 +70,12 @@ public class FileUpload extends HttpServlet {
                                 session.setAttribute("Errormsg","如果需要替换文件请先删除原同名文件后再进行提交");
                                 response.sendRedirect("ShowError");
                             }else {
-                                if (GetSuffix.suffix(realfilename).equals("jsp")) {
-                                    session.setAttribute("Redirect","SFP");
-                                    session.setAttribute("Error","禁止上传jsp文件");
+                                part.write(realpath + "upload/" + session.getAttribute("email") + "/" + realfilename);
+                                if (file2.exists()) response.sendRedirect("SFP");
+                                else {
+                                    session.setAttribute("Redirect", "SFP");
+                                    session.setAttribute("Error", "文件上传失败");
                                     response.sendRedirect("ShowError");
-                                } else {
-                                    part.write(realpath + "File/" + session.getAttribute("email") + "/" + realfilename);
-                                    if (file2.exists()) response.sendRedirect("SFP");
-                                    else {
-                                        session.setAttribute("Redirect", "SFP");
-                                        session.setAttribute("Error", "文件上传失败");
-                                        response.sendRedirect("ShowError");
-                                    }
                                 }
                             }
                         }

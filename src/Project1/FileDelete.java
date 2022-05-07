@@ -21,15 +21,15 @@ public class FileDelete extends HttpServlet {
             if (session.getAttribute("email")!=null && !uAC.check() && !RC.check()){
                 String[] filenames = request.getParameterValues("filename");
                 if (filenames != null && !SpecialCharCheck.check((String) session.getAttribute("email"))){
-                    String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
-                    File file0 = new File(realpath+"File/");
+                    String realpath = request.getServletContext().getRealPath("/");//获取项目真实地址
+                    File file0 = new File(realpath+"upload/");
                     file0.mkdir();
-                    File file1 = new File(realpath+"File/"+session.getAttribute("email")+"/");
+                    File file1 = new File(realpath+"upload/"+session.getAttribute("email")+"/");
                     file1.mkdir(); //创建用户文件夹
                     if (file1.exists()) { //如果用户文件夹存在
                         for (String filename : filenames){
                             System.out.println("del_file:"+filename);
-                            File file2 = new File(realpath+"File/"+session.getAttribute("email")+"/"+filename);
+                            File file2 = new File(realpath+"upload/"+session.getAttribute("email")+"/"+filename);
                             if (file2.exists()) { //如果欲删除的文件存在
                                 if (!file2.delete()) { //如果文件未删除成功
                                     session.setAttribute("Redirect","SFP");

@@ -56,10 +56,10 @@ public class RootDeleteUser extends HttpServlet {
                                     ps.setString(1, del_email);
                                     int delstate = ps.executeUpdate();
                                     if (delstate == 1){
-                                        String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
-                                        File file0 = new File(realpath+"File/");
+                                        String realpath = request.getServletContext().getRealPath("/");//获取项目真实地址
+                                        File file0 = new File(realpath+"upload/");
                                         file0.mkdir();
-                                        File file1 = new File(realpath+"File/"+del_email+"/");
+                                        File file1 = new File(realpath+"upload/"+del_email+"/");
                                         if (file1.exists()) {
                                             File[] files = file1.listFiles();
                                             for (File file : files) {

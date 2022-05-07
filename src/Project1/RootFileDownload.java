@@ -26,15 +26,15 @@ public class RootFileDownload extends HttpServlet {
                         response.sendRedirect("RSU");
                     } else {
                         if (filenames.length==1) {
-                            String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
-                            File file0 = new File(realpath + "File/");
+                            String realpath = request.getServletContext().getRealPath("/");//获取项目真实地址
+                            File file0 = new File(realpath + "upload/");
                             file0.mkdir();
-                            File file1 = new File(realpath + "File/" + session.getAttribute("R_email") + "/");
+                            File file1 = new File(realpath + "upload/" + session.getAttribute("R_email") + "/");
                             file1.mkdir(); //创建用户文件夹
                             if (file1.exists()) { //如果用户文件夹存在
                                 for (String filename : filenames) {  //实际只有一个文件
                                     System.out.println("下载的文件:" + filename);
-                                    File file2 = new File(realpath + "File/" + session.getAttribute("R_email") + "/" + filename);
+                                    File file2 = new File(realpath + "upload/" + session.getAttribute("R_email") + "/" + filename);
                                     if (file2.exists() && file2.isFile()) { //如果欲下载的文件存在
                                         response.setContentType("application/x-msdownload");
                                         response.setHeader("Content-Disposition", "attachment;filename=" + file2.getName()); //下载框内容

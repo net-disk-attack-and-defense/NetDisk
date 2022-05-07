@@ -17,17 +17,17 @@ public class RootFileUpload extends HttpServlet {
             System.out.println("RFU:"+request.getHeader("referer"));
             if (session.getAttribute("email")!=null) {
                 if (session.getAttribute("email").equals("ROOT@ROOT") && !uAC.check() && !RC.check() && session.getAttribute("R_email") != null){
-                    String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
-                    File file0 = new File(realpath+"File/");
+                    String realpath = request.getServletContext().getRealPath("/");//获取项目真实地址
+                    File file0 = new File(realpath+"upload/");
                     file0.mkdir();
-                    File file1 = new File(realpath+"File/"+session.getAttribute("R_email")+"/");
+                    File file1 = new File(realpath+"upload/"+session.getAttribute("R_email")+"/");
                     file1.mkdir();
                     if (file1.exists()){
                         String resetfilename =request.getParameter("resetfilename");//用户输入的文件名
                         Part part = request.getPart("uploadfile");
                         String realfilename =  part.getSubmittedFileName();//文件真实的名字
                         if (resetfilename.length()!=0){
-                            File file2 = new File(realpath+"File/"+session.getAttribute("R_email")+"/"+resetfilename);
+                            File file2 = new File(realpath+"upload/"+session.getAttribute("R_email")+"/"+resetfilename);
                             if (file2.exists()){ //判断上传的文件是否已存在
                                 session.setAttribute("Redirect","RSU");
                                 session.setAttribute("Error","已存在同名文件");
@@ -46,9 +46,9 @@ public class RootFileUpload extends HttpServlet {
                                             response.sendRedirect("ShowError");
                                         } else {
                                             resetfilename = resetfilename + "." +GetSuffix.suffix(realfilename);
-                                            part.write(realpath+"File/"+session.getAttribute("R_email")+"/"+resetfilename);
+                                            part.write(realpath+"upload/"+session.getAttribute("R_email")+"/"+resetfilename);
                                             //上传完后验证是否上传成功
-                                            File file3 = new File(realpath+"File/"+session.getAttribute("R_email")+"/"+resetfilename);
+                                            File file3 = new File(realpath+"upload/"+session.getAttribute("R_email")+"/"+resetfilename);
                                             if(file3.exists()) response.sendRedirect("RSU");
                                             else {
                                                 session.setAttribute("Redirect","RSU");
@@ -57,9 +57,9 @@ public class RootFileUpload extends HttpServlet {
                                             }
                                         }
                                     }else {
-                                        part.write(realpath+"File/"+session.getAttribute("R_email")+"/"+resetfilename);
+                                        part.write(realpath+"upload/"+session.getAttribute("R_email")+"/"+resetfilename);
                                         //上传完后验证是否上传成功
-                                        File file3 = new File(realpath+"File/"+session.getAttribute("R_email")+"/"+resetfilename);
+                                        File file3 = new File(realpath+"upload/"+session.getAttribute("R_email")+"/"+resetfilename);
                                         if(file3.exists()) response.sendRedirect("RSU");
                                         else {
                                             session.setAttribute("Redirect","RSU");
@@ -70,7 +70,7 @@ public class RootFileUpload extends HttpServlet {
                                 }
                             }
                         } else {  //用户未输入文件名
-                            File file2 = new File(realpath+"File/"+session.getAttribute("R_email")+"/"+realfilename);
+                            File file2 = new File(realpath+"upload/"+session.getAttribute("R_email")+"/"+realfilename);
                             if (file2.exists()){ //判断上传的文件是否已存在
                                 session.setAttribute("Redirect","RSU");
                                 session.setAttribute("Error","已存在同名文件");
@@ -82,7 +82,7 @@ public class RootFileUpload extends HttpServlet {
                                     session.setAttribute("Error","禁止上传jsp文件");
                                     response.sendRedirect("ShowError");
                                 } else {
-                                    part.write(realpath + "File/" + session.getAttribute("R_email") + "/" + realfilename);
+                                    part.write(realpath + "upload/" + session.getAttribute("R_email") + "/" + realfilename);
                                     if (file2.exists()) response.sendRedirect("RSU");
                                     else {
                                         session.setAttribute("Redirect", "RSU");

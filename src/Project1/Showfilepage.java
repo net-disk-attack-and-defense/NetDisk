@@ -18,10 +18,10 @@ public class Showfilepage extends ViewBaseServlet {
                     System.out.println("SFP:"+request.getHeader("referer"));
                     Referer_Check RC = new Referer_Check(request.getHeader("referer"), "NetDisk/ShowError","NetDisk/SFP","NetDisk/filepage.html","NetDisk/login.html","/NetDisk/RSUF");
                     if (!RC.check() && session.getAttribute("email") != null) {  //验证来源链接
-                        String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
-                        File file0 = new File(realpath+"File/");
+                        String realpath = request.getServletContext().getRealPath("/");//获取项目真实地址
+                        File file0 = new File(realpath+"upload/");
                         file0.mkdir();
-                        File file1 = new File(realpath+"File/"+session.getAttribute("email")+"/");
+                        File file1 = new File(realpath+"upload/"+session.getAttribute("email")+"/");
                         file1.mkdir();
                         File[] files = file1.listFiles();
                         session.setAttribute("allfiles", files);

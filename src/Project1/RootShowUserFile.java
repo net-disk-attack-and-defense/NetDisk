@@ -42,10 +42,10 @@ public class RootShowUserFile extends ViewBaseServlet{
                             } else {
                                 session.setAttribute("R_username",SF_name);
                                 session.setAttribute("R_email",SF_email);
-                                String realpath = request.getServletContext().getRealPath("/WEB-INF/");//获取项目真实地址
-                                File file0 = new File(realpath+"File/");
+                                String realpath = request.getServletContext().getRealPath("/");//获取项目真实地址
+                                File file0 = new File(realpath+"upload/");
                                 file0.mkdir();
-                                File file1 = new File(realpath+"File/"+SF_email+"/");
+                                File file1 = new File(realpath+"upload/"+SF_email+"/");
                                 file1.mkdir();
                                 File[] files = file1.listFiles();
                                 session.setAttribute("R_allfiles", files);
