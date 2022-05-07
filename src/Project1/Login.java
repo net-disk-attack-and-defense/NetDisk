@@ -84,7 +84,7 @@ public class Login extends HttpServlet {
                         } else permit = 1; //如果没有ip被封的记录，则放行
                         if (permit == 1){
                             //正常放行
-                            String sql = "select*from mypan.users where email='"+email+"' and passwd='"+password+"'";//?是占位符
+                            String sql = "select name from mypan.users where email='"+email+"' and passwd='"+password+"'";//?是占位符
                             stmt = conn.createStatement();
                             rs = stmt.executeQuery(sql);
                             if (rs.next()) {
