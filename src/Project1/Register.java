@@ -29,13 +29,13 @@ public class Register extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String email = request.getParameter("email");
-            if (username.length() > 20 || username.length() <= 2 || password.length() < 6 || password.length() > 32 || email.length() > 32) {
+            if (username.length() > 100 || username.length() <= 2 || password.length() < 6 || password.length() > 32 || email.length() > 32) {
                 response.sendRedirect("register.html");
             } else {
                 if (username.equals("ROOT") || email.equals("ROOT@ROOT")){ //不允许注册管理员账户
                     response.sendRedirect("register.html");
                 }else {
-                    if (SpecialCharCheck.check(username) || SpecialCharCheck.check(password) || SpecialCharCheck.check(email)){
+                    if (SpecialCharCheck.check(password) || SpecialCharCheck.check(email)){
                         response.sendError(403);
                     }else {
                         int register_state;

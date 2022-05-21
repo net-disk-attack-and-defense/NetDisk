@@ -3,7 +3,7 @@ function check() {
     if (username.length <= 2) {
         alert("用户名过短，请重新输入！");
         return false;
-    } else if (username.length > 20) {
+    } else if (username.length > 100) {
         alert("用户名过长，请重新输入！");
         return false;
     } else {
